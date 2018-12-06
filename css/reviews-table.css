@@ -1,0 +1,7 @@
+.table>colgroup+thead>tr:first-child>th {
+    vertical-align: middle;
+}
+
+#review {
+    text-align: center;
+}

@@ -1,0 +1,14 @@
+@media screen and (min-width: 992px){
+    .vdiv {
+        border-left: #eeeeee 1px solid;
+        padding-left: 4%;
+    }
+}
+
+@media screen and (max-width: 991px){
+    .vdiv {
+        margin-top: 25px;
+        border-top: #eeeeee 1px solid;
+        padding-top: 25px;
+    }
+}

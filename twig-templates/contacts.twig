@@ -1,0 +1,76 @@
+<!-- Makro na vypis kontaktu -->
+{% macro print(contact)%}
+    <div class="contact well">
+        <table>
+            <tr>
+                <td></td>
+                <td><b>{{ contact.first_name }} {{ contact.last_name }}</b><br></td>
+            </tr>
+            <tr>
+                <td><span class="glyphicon glyphicon-envelope"></span></td>
+                <td>{{ contact.email }}</td>
+            </tr>
+            <tr>
+                <td><span class="glyphicon glyphicon-earphone"></span></td>
+                <td>{{ contact.phone_num }}</td>
+            </tr>
+        </table>
+    </div>
+{% endmacro %}
+
+<!-- Sablona  -->
+{% include('header.twig') %}
+
+<div class="container-fluid">
+    {% include('navbar.twig') %}
+
+    <div class="container">
+        <fieldset>
+            <legend><h2>Contacts</h2></legend>
+            <div class="row tlacitka">
+
+                <!-- KONTAKTY -->
+                <div class="col-md-4">
+                    {% import _self as printer %}
+                    {% for c in contacts %}
+                        {{ printer.print(c) }}
+                    {% endfor %}
+                </div>
+
+                <!-- MAPA A ADRESA -->
+                <div class="col-md-offset-1 col-md-6">
+                    <div class="well con-loc">
+                        <table>
+                            <tr>
+                                <td><span class="glyphicon glyphicon-map-marker"></span></td><td><i>The annual conference takes place at</i></td>
+                            </tr>
+                            <tr><td></td><td>
+                                    <address>
+                                        <i> <b>RM Bailey Park</b><br>
+                                            Robinson Rd<br>
+                                            Nassau<br>
+                                            The Bahamas</i><br>
+                                    </address></td></tr>
+                        </table>
+
+                        <div>
+                            <!-- Bing mapa -->
+                            <iframe id="bingmap" frameborder="0" src="https://www.bing.com/maps/embed?h=400&w=500&cp=26.889766246125937~-68.96389915518473&lvl=4&typ=d&sty=h&src=SHELL&FORM=MBEDV8" scrolling="no">
+                            </iframe>
+                            <div id="maplinks">
+                                <a id="largeMapLink" target="_blank"
+                                   href="https://www.bing.com/maps?cp=26.889766246125937~-68.96389915518473&amp;sty=h&amp;lvl=4&amp;FORM=MBEDLD">
+                                    View Larger Map</a> &nbsp; | &nbsp;
+                                <a id="dirMapLink" target="_blank"
+                                   href="https://www.bing.com/maps/directions?cp=26.889766246125937~-68.96389915518473&amp;sty=h&amp;lvl=4&amp;rtp=~pos.26.889766246125937_-68.96389915518473____&amp;FORM=MBEDLD">
+                                    Get Directions</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+{% include('footer.twig') %}

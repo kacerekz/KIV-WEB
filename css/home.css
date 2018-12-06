@@ -1,0 +1,38 @@
+div {
+    text-align: justify;
+}
+
+/* cast tlacitek */
+.tlacitka div {
+    border: 5px outset gray;
+    padding: 20px;
+    text-align: center;
+    background-color: darkblue;
+    color: white;
+}
+.tlacitka div:hover {
+    border: 5px inset gray;
+    background-color: blue;
+}
+/* cast obsahu */
+.obsah div {
+    border: 1px solid black;
+    padding: 5px;
+    background-color: rgb(253, 255, 171);
+}
+.obsah div:first-child {
+    background-color: rgb(255, 227, 171);
+}
+.obsah div:last-child {
+    background-color: rgb(230, 255, 246);
+}
+/* cast zapati */
+.zapati {
+    background-color: dimgray;
+    color: white;
+    padding: 5px;
+}
+.zapati div {
+    border: 1px solid white;
+    padding: 5px;
+}

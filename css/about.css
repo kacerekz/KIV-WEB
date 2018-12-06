@@ -1,0 +1,37 @@
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.carousel {
+    background-color: #212121;
+}
+
+.carousel-inner >.item > img {
+    /* Kdo vi proc to chce o 100px mene aby to nejak vypadalo. Odmita to prestat zvetsovat obrazky nad jejich realnou velikost.
+     A container namisto container-fluid se mi nelibi, chci ty tmave strany. A stejne uz nevim, jestli to s nim slo. */
+    max-height: 668px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.col-md-4 {
+    padding: 40px 20px 40px 20px;
+}
+
+.qsrc {
+    padding-top: 10px;
+    padding-right: 10px;
+    display: block;
+    text-align: right;
+    font-size: medium;
+    font-weight: bold;
+}
+
+.img-responsive{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    max-width: 50%;
+}
