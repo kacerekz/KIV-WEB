@@ -13,25 +13,38 @@
         <ul class="nav navbar-nav">
 
             <!-- Polozky menu, mohou byt aktivni -->
-            <li {% if index == 1 %} class="active" {% endif %}> <a href="index.php?page=home">Home</a></li>
-            <li {% if index == 2 %} class="active" {% endif %}> <a href="index.php?page=about">About</a></li>
-            <li {% if index == 3 %} class="active" {% endif %}> <a href="index.php?page=contacts">Contacts</a></li>
+            <li class="nav-item" {% if index == 1 %} class="active" {% endif %}>
+                <a class="nav-link" href="index.php?page=home">Home</a>
+            </li>
+            <li class="nav-item" {% if index == 2 %} class="active" {% endif %}>
+                <a class="nav-link" href="index.php?page=about">About</a>
+            </li>
+            <li class="nav-item" {% if index == 3 %} class="active" {% endif %}>
+                <a class="nav-link" href="index.php?page=contacts">Contacts</a>
+            </li>
 
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <!-- Pokud je uzivatel prihlasen-->
             {% if user is defined %}
 
-                <!-- Pokud neni prihlasen uzivatel ale je vybrana stranka prihlaseni -->
-            {% elseif index == 0 %}
-                <li class="active">
-                    <a href="index.php?page=login">
-                        <span class="glyphicon glyphicon-log-in"></span> Log in</a>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"> {{ user.login }}
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        {% if user.rights_id_rights == 1 %} <li><a href="index.php?page=articles">My articles</a></li> {% endif %}
+                        {% if user.rights_id_rights == 2 %} <li><a href="index.php?page=reviews">My reviews</a></li> {% endif %}
+                        {% if user.rights_id_rights == 3 %} <li><a href="index.php?page=rvwass">Review assignment</a></li> {% endif %}
+                        {% if user.rights_id_rights == 3 %} <li><a href="index.php?page=usrmng">User management</a></li> {% endif %}
+                        <li><a href="index.php?page=settings">Settings</a></li>
+                        <li><a href="index.php?logout=true">Log out</a></li>
+                    </ul>
                 </li>
-                <!-- Jinak -->
+
+            <!-- Pokud neni prihlasen uzivatel -->
             {% else %}
-                <li>
-                    <a href="index.php?page=login">
+                <li class="nav-item" {% if index == 0 %} class="active" {% endif %}>
+                    <a class="nav-link" href="index.php?page=login">
                         <span class="glyphicon glyphicon-log-in"></span> Log in</a>
                 </li>
             {% endif %}

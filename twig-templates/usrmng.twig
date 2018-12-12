@@ -1,0 +1,35 @@
+{% extends "base.twig" %}
+{% block content %}
+
+    <div class="container">
+
+        <h2>Manage users</h2>
+        <hr>
+
+        <div class="table-responsive">
+
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Full name</th>
+                    <th>Username</th>
+                    <th>E-mail</th>
+                    <th id="delete-col">Delete</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>Sam One</td>
+                    <td>s0m31</td>
+                    <td>sam.one@example.com</td>
+                    <td><button class="btn delete-usr">Delete</button></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+{% endblock content %}

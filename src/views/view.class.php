@@ -2,17 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: PC
- * Date: 02-Dec-18
- * Time: 2:59 PM
+ * Date: 06-Dec-18
+ * Time: 11:15 PM
  */
 
-class ContactsView
+class View
 {
     public function __construct() {
     }
 
     public static function viewPage($twig, $data){
-        $template = $twig->load("contacts.twig");
+        $template = $twig->load($data["page"].".twig");
         echo $template->render($data);
     }
 }

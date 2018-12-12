@@ -1,0 +1,28 @@
+#link-col, #status-col, #sum-col {
+    width: 10%;
+}
+
+.glyphicon-edit {
+    font-size: 20px;
+    margin-top: 1px;
+}
+
+.glyphicon-edit:hover {
+    color: gray;
+}
+
+.submit {
+    background-color: #e5e5e5;
+    color: #353535;
+    padding: 3px 5px;
+}
+
+.submit:hover {
+    background-color: #ffffff;
+    color: #353535;
+}
+
+.submit:focus {
+    background-color: #ffffff;
+    color: #353535;
+}

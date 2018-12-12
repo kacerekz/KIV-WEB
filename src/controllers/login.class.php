@@ -6,19 +6,13 @@
  * Time: 2:48 PM
  */
 
-class Login
+require("controller.class.php");
+
+class Login extends Controller
 {
-    private $twig;
-
-    public function __construct($twig) {
-        $this->twig = $twig;
-    }
-
     public function viewPage($data){
-        //get articles from DB
-        include("src/views/loginview.class.php");
         $data["cssfile"] = array("css/login.css", "css/form.css");
-        LoginView::viewPage($this->twig, $data);
+        parent::viewPage($data);
     }
 
 }

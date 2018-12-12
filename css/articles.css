@@ -1,0 +1,35 @@
+#link-col, #status-col {
+    width: 10%;
+}
+
+.glyphicon-edit {
+    font-size: 20px;
+}
+
+.glyphicon-edit:hover {
+    color: gray;
+}
+
+.glyphicon-pencil {
+    margin-right: 5px;
+}
+
+.new-article {
+    float: right;
+}
+
+.submit {
+    background-color: #e5e5e5;
+    color: #353535;
+    padding: 3px 5px;
+}
+
+.submit:hover {
+    background-color: #ffffff;
+    color: #353535;
+}
+
+.submit:focus {
+    background-color: #ffffff;
+    color: #353535;
+}

@@ -1,7 +1,5 @@
-{% include('header.twig') %}
-
-<div class="container-fluid">
-    {% include('navbar.twig') %}
+{% extends "base.twig" %}
+{% block content %}
 
     <div class="container">
         <h2>Assign reviews</h2>
@@ -58,5 +56,4 @@
         </div>
     </div>
 
-</div>
-{% include('footer.twig') %}
+{% endblock content %}

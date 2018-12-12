@@ -1,15 +1,12 @@
-{% include('header.twig') %}
-
-<div class="container-fluid">
-    {% include('navbar.twig') %}
-</div>
+{% extends "base.twig" %}
+{% block content %}
 
 <div class="container">
     <div class="row">
 
         <!-- Prihlaseni -->
         <div class="col-md-5">
-            <form class="form-horizontal">
+            <form class="form-horizontal" action="../index.php" method="post">
 
                 <!-- Nadpis -->
                 <div class="form-group">
@@ -22,7 +19,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2 col-md-3 col-lg-2" for="username">Username:</label>
                     <div class="col-sm-7 col-md-6 col-lg-7">
-                        <input type="text" class="form-control" id="username" placeholder="Username">
+                        <input type="text" class="form-control" name="username" placeholder="Username">
                     </div>
                 </div>
 
@@ -30,23 +27,25 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2 col-md-3 col-lg-2" for="password">Password:</label>
                     <div class="col-sm-7 col-md-6 col-lg-7">
-                        <input type="password" class="form-control" id="password" placeholder="Password">
+                        <input type="password" class="form-control" name="password" placeholder="Password">
                     </div>
                 </div>
 
-                <!-- Ulozeni -->
+                <!-- Ulozeni
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-7">
                         <div class="checkbox">
-                            <label><input type="checkbox" id="save"> Remember me</label>
+                            <label><input type="checkbox" name="save"> Remember me</label>
                         </div>
                     </div>
-                </div>
+                </div> -->
+
+                <input type="hidden" name="action" value="login">
 
                 <!-- Odeslani -->
                 <div class="form-group">
                     <div class="col-xs-offset-1 col-xs-10 col-sm-offset-7 col-sm-2 col-md-offset-6 col-md-3 ">
-                        <button type="submit" id="log" class="btn">Log in</button>
+                        <input type="submit" name="login-form" class="btn" value="Log in">
                     </div>
                 </div>
 
@@ -55,7 +54,7 @@
 
         <!-- Registrace -->
         <div class="col-md-7 vdiv">
-            <form class="form-horizontal">
+            <form class="form-horizontal" action="../index.php" method="post">
 
                 <!-- Nadpis -->
                 <div class="form-group">
@@ -66,46 +65,46 @@
 
                 <!-- Jmeno -->
                 <div class="form-group">
-                    <label class="control-label col-sm-2 col-md-3" for="name-su">Full name:</label>
+                    <label class="control-label col-sm-2 col-md-3" for="fullname">Full name:</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" id="name-su" placeholder="Full name">
+                        <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Full name">
                     </div>
                 </div>
 
                 <!-- Prihlasovaci jmeno -->
                 <div class="form-group">
-                    <label class="control-label col-sm-2 col-md-3" for="username-su">Username:</label>
+                    <label class="control-label col-sm-2 col-md-3" for="username">Username:</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" id="username" placeholder="Username">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Username">
                     </div>
                 </div>
 
                 <!-- Heslo -->
                 <div class="form-group">
-                    <label class="control-label col-sm-2 col-md-3" for="password-su">Password:</label>
+                    <label class="control-label col-sm-2 col-md-3" for="password">Password:</label>
                     <div class="col-sm-7">
-                        <input type="password" class="form-control" id="password" placeholder="Password">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                     </div>
                 </div>
 
                 <!-- Email -->
                 <div class="form-group">
-                    <label class="control-label col-sm-2 col-md-3" for="email-su">E-mail:</label>
+                    <label class="control-label col-sm-2 col-md-3" for="email">E-mail:</label>
                     <div class="col-sm-7">
-                        <input type="email" class="form-control" id="email-su" placeholder="yourname@example.com">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="yourname@example.com">
                     </div>
                 </div>
+
+                <input type="hidden" name="action" value="signup">
 
                 <!-- Odeslani -->
                 <div class="form-group">
                     <div class="col-xs-offset-1 col-xs-10 col-sm-offset-7 col-sm-2 col-md-offset-7 col-md-3 "> <!--col-xs-offset-9 col-xs-2-->
-                        <button type="submit" id="su" class="btn">Sign up</button>
+                        <input type="submit" name="signup-form" class="btn" value="Sign up">
                     </div>
                 </div>
 
             </form>
         </div>
     </div>
-</div>
-
-{% include('footer.twig') %}
+{% endblock content %}

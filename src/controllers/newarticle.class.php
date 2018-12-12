@@ -8,9 +8,10 @@
 
 require("controller.class.php");
 
-class About extends Controller
+class NewArticle extends Controller
 {
     public function viewPage($data){
+        $data["scripts"] = array("https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js");
         parent::viewPage($data);
     }
 }

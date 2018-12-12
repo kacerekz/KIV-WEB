@@ -39,3 +39,44 @@ html, body {
     bottom: 0;
     left: 0;
 }
+
+.container > .h2, .h3, h2, h3 {
+    margin-top: 50px;
+}
+
+hr {
+    margin-top: 0;
+}
+
+.btn {
+    color: #e0e0e0;
+    background-color: #353535;
+}
+
+.btn:hover {
+    color: #ffffff;
+    background-color: #353535;
+}
+
+.btn:focus {
+    color: #ffffff;
+    background-color: #353535;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.dropdown-menu {
+    background-color: #212121;
+}
+
+.dropdown-menu>li>a {
+    color: #9d9d9d;
+    padding: 8px 8px 8px 12px;
+}
+
+.dropdown-menu>li>a:hover {
+    background-color: #313131;
+    color: #ffffff;
+}

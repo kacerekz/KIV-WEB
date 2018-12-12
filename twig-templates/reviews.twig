@@ -1,0 +1,34 @@
+{% extends "base.twig" %}
+{% block content %}
+
+<div class="container">
+
+        <h2>Articles for review</h2>
+        <hr>
+        <div class="table-responsive">
+
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Article</th>
+                    <th>Author</th>
+                    <th id="link-col">Review</th>
+                    <th id="sum-col">Sum</th>
+                    <th id="status-col">Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>50,000</td>
+                    <td>30,000</td>
+                    <td><span class="glyphicon glyphicon-edit"></span></td>
+                    <td>30,000</td>
+                    <td><button class="btn submit">Submit</button></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+{% endblock content %}

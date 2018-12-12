@@ -1,0 +1,9 @@
+.mybutton {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.spinner {
+    border-radius: 5px;
+    border: 1px solid lightgray;
+}

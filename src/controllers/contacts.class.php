@@ -6,25 +6,15 @@
  * Time: 2:47 PM
  */
 
-class Contacts
+require("controller.class.php");
+
+class Contacts extends Controller
 {
-    private $twig;
-
-    public function __construct($twig) {
-        $this->twig = $twig;
-    }
-
     public function viewPage($data){
-        // Predava sablone kontakty
         include("src/models/database.class.php");
         $db = new Database();
-        $contacts = $db->getAllContacts();
+        $contacts = $db->DBSelectAll("contacts", "*", array(), "", "");
         $data['contacts'] = $contacts;
-
-        // Zobrazuje sablonu
-        include("src/views/contactsview.class.php");
-        $data["cssfile"] = array("css/contacts.css");
-        ContactsView::viewPage($this->twig, $data);
+        parent::viewPage($data);
     }
-
 }

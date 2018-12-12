@@ -1,0 +1,19 @@
+.delete-usr {
+    background-color: #e5e5e5;
+    color: #353535;
+    padding: 3px 5px;
+}
+
+.delete-usr:hover {
+    background-color: #ffffff;
+    color: #353535;
+}
+
+.delete-usr:focus {
+    background-color: #ffffff;
+    color: #353535;
+}
+
+#delete-col{
+    width: 10%;
+}

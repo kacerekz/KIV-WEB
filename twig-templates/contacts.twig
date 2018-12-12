@@ -1,28 +1,25 @@
-<!-- Makro na vypis kontaktu -->
-{% macro print(contact)%}
-    <div class="contact well">
-        <table>
-            <tr>
-                <td></td>
-                <td><b>{{ contact.first_name }} {{ contact.last_name }}</b><br></td>
-            </tr>
-            <tr>
-                <td><span class="glyphicon glyphicon-envelope"></span></td>
-                <td>{{ contact.email }}</td>
-            </tr>
-            <tr>
-                <td><span class="glyphicon glyphicon-earphone"></span></td>
-                <td>{{ contact.phone_num }}</td>
-            </tr>
-        </table>
-    </div>
-{% endmacro %}
+{% extends "base.twig" %}
+{% block content %}
 
-<!-- Sablona  -->
-{% include('header.twig') %}
-
-<div class="container-fluid">
-    {% include('navbar.twig') %}
+    <!-- Makro na vypis kontaktu -->
+    {% macro print(contact)%}
+        <div class="contact well">
+            <table>
+                <tr>
+                    <td></td>
+                    <td><b>{{ contact.first_name }} {{ contact.last_name }}</b><br></td>
+                </tr>
+                <tr>
+                    <td><span class="glyphicon glyphicon-envelope"></span></td>
+                    <td>{{ contact.email }}</td>
+                </tr>
+                <tr>
+                    <td><span class="glyphicon glyphicon-earphone"></span></td>
+                    <td>{{ contact.phone_num }}</td>
+                </tr>
+            </table>
+        </div>
+    {% endmacro %}
 
     <div class="container">
         <fieldset>
@@ -71,6 +68,5 @@
             </div>
         </fieldset>
     </div>
-</div>
 
-{% include('footer.twig') %}
+{% endblock content %}

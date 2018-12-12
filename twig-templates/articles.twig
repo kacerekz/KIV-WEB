@@ -1,0 +1,34 @@
+{% extends "base.twig" %}
+{% block content %}
+
+    <div class="container">
+        <div>
+            <a href="index.php?page=newarticle">
+                <button class="btn new-article">
+                    <span class="glyphicon glyphicon-pencil"></span>New article
+                </button>
+            </a>
+            <h2>My articles</h2>
+        </div>
+        <hr>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Article</th>
+                    <th id="link-col">Link</th>
+                    <th id="status-col">Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>50,000</td>
+                    <td><span class="glyphicon glyphicon-edit"></span></td>
+                    <td><button class="btn submit">Submit</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock content %}

@@ -1,16 +1,10 @@
-.btn {
-    color: #e0e0e0;
-    margin-top: 10px;
-    background-color: #353535;
-    width: 100%;
-}
-
-.btn:hover {
-    color: #ffffff;
-}
-
 @media screen and (min-width: 992px){
     .btn {
         margin-top: 20px;
     }
+}
+
+.btn {
+    margin-top: 10px;
+    width: 100%;
 }
