@@ -11,6 +11,11 @@ require("controller.class.php");
 class Home extends Controller
 {
     public function viewPage($data){
+
+        echo "<pre style='margin-top: 60px'>";
+        var_dump($_SESSION);
+        echo "</pre>";
+
         parent::viewPage($data);
     }
 }

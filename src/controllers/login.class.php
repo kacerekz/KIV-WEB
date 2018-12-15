@@ -12,6 +12,11 @@ class Login extends Controller
 {
     public function viewPage($data){
         $data["cssfile"] = array("css/login.css", "css/form.css");
+
+        echo "<pre style='margin-top: 60px'>";
+        var_dump($_SESSION);
+        echo "</pre>";
+
         parent::viewPage($data);
     }
 
