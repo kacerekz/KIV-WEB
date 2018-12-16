@@ -1,8 +1,8 @@
 <?php
 
 include ("../models/database.class.php");
-
 $db = new Database();
+
 $user = $db->DBSelectOne("users", "login", array(
     array("column"=>"login", "symbol" => "=", "value" => $_POST['username'])));
 
@@ -19,7 +19,6 @@ if (isset($user['login'])){
         array("column" => "rights_id_rights",   "value" => "1"),
         array("column" => "blocked",          "value" => "0"))
     );
-
 
     include ("../controllers/login-manager.class.php");
     $lm = new LoginManager();

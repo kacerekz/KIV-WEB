@@ -11,7 +11,6 @@ require("controller.class.php");
 class Rvwass extends Controller
 {
     public function viewPage($data){
-        $data["cssfile"] = array("css/reviews-table.css");
         parent::viewPage($data);
     }
 }

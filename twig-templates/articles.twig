@@ -1,6 +1,45 @@
 {% extends "base.twig" %}
 {% block content %}
 
+    {% macro print(post)%}
+        <tr>
+            <td>{{ post.title }}</td>
+
+            <td>
+                <form action="index.php?page=newarticle" method="post">
+                    <input type="hidden" name="post_id" value={{ post.id_posts }}>
+                    <input type="hidden" name="mode" value="edit">
+                    <button type="submit" class="edit-btn"><span class="glyphicon glyphicon-edit"></span></button>
+                </form>
+            </td>
+
+            <td>
+                {% if post.status == 1 %}
+                    Unfinished
+
+                {% elseif post.status == 2 %}
+                    Under review
+
+                {% elseif post.status == 3 %}
+                    <span class="glyphicon glyphicon-share"></span>Declined
+
+                {% elseif post.status == 4 %}
+                    <span class="glyphicon glyphicon-share"></span>Accepted
+
+                {% endif %}
+
+            </td>
+
+            <td>
+                <form action="src/form-processing/article.php" method="post">
+                    <input type="hidden" name="post_id" value={{ post.id_posts }}>
+                    <input type="submit" class="btn submit" name="delete" value="Delete">
+                </form>
+            </td>
+        </tr>
+    {% endmacro %}
+
+
     <div class="container">
         <div>
             <a href="index.php?page=newarticle">
@@ -16,15 +55,17 @@
                 <thead>
                 <tr>
                     <th>Article</th>
-                    <th id="link-col">Link</th>
+                    <th id="link-col"></th>
                     <th id="status-col">Status</th>
+                    <th id="delete-col">Delete</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>50,000</td>
-                    <td><span class="glyphicon glyphicon-edit"></span></td>
-                    <td><button class="btn submit">Submit</button></td>
+                    {% import _self as printer %}
+                    {% for a in articles %}
+                        {{ printer.print(a) }}
+                    {% endfor %}
                 </tr>
                 </tbody>
             </table>

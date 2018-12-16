@@ -3,12 +3,36 @@
 
     <div class="container">
 
-        <form class="form-horizontal" action="../index.php" method="post">
+        <div class="col-sm-offset-2 col-sm-7 col-md-8 col-lg-7">
+            <div>
+                <a href="index.php?page=articles">
+                    <button class="btn articles-btn">
+                        <span class="glyphicon glyphicon-chevron-left"></span>To articles
+                    </button>
+                </a>
 
-            <!-- Nadpis -->
-            <div class="form-group">
-                <div class="col-sm-9">
+                {% if post is defined %}
+                    <h3>Edit article</h3>
+                {% else %}
                     <h3>New article</h3>
+                {% endif %}
+
+                <hr>
+
+            </div>
+        </div>
+
+        <form class="form-horizontal" action="../src/form-processing/article.php" method="post">
+
+            <input type="hidden" name="user_id" value={{ user.id_user }}>
+
+            <!-- Takhle to musi byt jinak se vsechno rozpadne :)) Nejde to spojit s tlacitkem zpet,
+                    tlacitko pak chce vyplnit titulek.... -->
+            <div class="form-group">
+                <div class="col-xs-offset-0 col-sm-offset-1 col-sm-8 col-md-9 col-lg-8">
+                    {% if post is defined %}
+                        <input type="hidden" name="post_id" value={{ post.id_posts }}>
+                    {% endif %}
                 </div>
             </div>
 
@@ -16,7 +40,11 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="title">Title:</label>
                 <div class="col-sm-7 col-md-8 col-lg-7">
-                    <input type="text" class="form-control" name="title" id="title" placeholder="New article">
+                    {% if post is defined %}
+                        <input type="text" class="form-control" name="title" id="title" maxlength="60" value = "{{post.title }}" required>
+                    {% else %}
+                        <input type="text" class="form-control" name="title" id="title" maxlength="60" placeholder="New article" required>
+                    {% endif %}
                 </div>
             </div>
 
@@ -25,7 +53,7 @@
                 <label class="control-label col-sm-2" for="password">Enclose PDF:</label>
                 <div class="col-sm-7">
                     <div class="upload-btn-wrapper">
-                        <button class="btn">Upload a file</button>
+                        <button class="btn file-btn">Upload a file</button>
                         <input type="file" name="pdf" />
                     </div>
                 </div>
@@ -33,37 +61,55 @@
 
             <!-- EDITOR -->
             <div class="row">
-                <div class="col-sm-offset-2 col-sm-7">
-                    <textarea name="content" id="editor"></textarea>
+                <div class="col-sm-offset-2 col-sm-7 col-md-8 col-lg-7">
+                    <textarea name="content" id="editor">
+                        {% if post is defined %}
+                            {{ post.text | escape }}
+                        {% endif %}
+                    </textarea>
+
                 </div>
             </div>
             <!-- /EDITOR -->
 
-            <input type="hidden" name="action" value="newarticle">
-
             <!-- Ulozeni -->
             <div class="form-group">
+
                 <div class="col-xs-6 col-sm-offset-3 col-sm-3 col-md-offset-6 col-md-2 col-lg-offset-5 col-lg-2 ">
-                    <input type="submit" name="save-draft" class="btn mybutton" value="Save draft">
+                    {% if post is defined and post.status == 2 %}
+                        <input type="submit" name="save-draft" class="btn mybutton" value="Save draft" disabled>
+                    {% else %}
+                        <input type="submit" name="save-draft" class="btn mybutton" value="Save draft">
+                    {% endif %}
                 </div>
+
                 <div class="col-xs-6 col col-sm-3 col-md-2 col-lg-2">
                     <input type="submit" name="submit" class="btn mybutton" value="Submit">
                 </div>
+
             </div>
 
         </form>
-
     </div>
 
-<script>
-    ClassicEditor
-        .create( document.querySelector( '#editor' ) )
-        .then( editor => {
-            console.log( editor );
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
-</script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ), {
+                removePlugins: [ 'ImageUpload' ],
+                heading: {
+                    options: [
+                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                        { model: 'heading3', view: 'h3', title: 'Heading', class: 'ck-heading_heading3' },
+                        { model: 'heading4', view: 'h4', title: 'Smaller heading', class: 'ck-heading_heading4' }
+                    ]
+                }
+            } )
+            .then( editor => {
+                console.log( editor );
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 
 {% endblock content %}

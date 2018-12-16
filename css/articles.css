@@ -1,5 +1,13 @@
-#link-col, #status-col {
+#link-col {
+    width: 4%;
+}
+
+#status-col{
     width: 10%;
+}
+
+#delete-col {
+    width: 7%;
 }
 
 .glyphicon-edit {
@@ -32,4 +40,10 @@
 .submit:focus {
     background-color: #ffffff;
     color: #353535;
+}
+
+.edit-btn {
+    background: transparent;
+    border: none !important;
+    font-size:0;
 }
