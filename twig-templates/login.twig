@@ -6,7 +6,7 @@
 
             <!-- Prihlaseni -->
             <div class="col-md-5">
-                <form class="form-horizontal" action="../index.php" method="post">
+                <form class="form-horizontal" action="../src/form-processing/log-in.php" method="post">
 
                     <!-- Nadpis -->
                     <div class="form-group">
@@ -18,7 +18,7 @@
                     <!-- Prihlasovaci jmeno -->
                     <div class="form-group">
                         <label class="control-label col-sm-2 col-md-3 col-lg-2" for="username">Username:</label>
-                        <div class="col-sm-7 col-md-6 col-lg-7">
+                        <div class="col-sm-7 col-md-7 col-lg-8">
                             <input type="text" class="form-control" name="username" placeholder="Username" required>
                         </div>
                     </div>
@@ -26,26 +26,32 @@
                     <!-- Heslo -->
                     <div class="form-group">
                         <label class="control-label col-sm-2 col-md-3 col-lg-2" for="password">Password:</label>
-                        <div class="col-sm-7 col-md-6 col-lg-7">
+                        <div class="col-sm-7 col-md-7 col-lg-8">
                             <input type="password" class="form-control" name="password" placeholder="Password" required>
                         </div>
                     </div>
 
-                    <input type="hidden" name="action" value="login">
-
                     <!-- Odeslani -->
                     <div class="form-group">
-                        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-7 col-sm-2 col-md-offset-6 col-md-3 ">
-                            <input type="submit" name="login-form" class="btn" value="Log in">
+                        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-7 col-sm-2 col-md-offset-7 col-md-3 ">
+                            <input type="submit" class="btn" value="Log in">
                         </div>
                     </div>
+
+                    {% if wrong_login == 1 %}
+                        <div class="alert alert-danger alert-dismissible" id="alert1">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong><span class="glyphicon glyphicon-exclamation-sign"></span>
+                                Login failed.</strong> Wrong username or password.
+                        </div>
+                    {% endif %}
 
                 </form>
             </div>
 
             <!-- Registrace -->
             <div class="col-md-7 vdiv">
-                <form class="form-horizontal" action="../index.php" method="post">
+                <form class="form-horizontal" action="../src/form-processing/signup.php" method="post">
 
                     <!-- Nadpis -->
                     <div class="form-group">
@@ -58,7 +64,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2 col-md-3" for="fullname">Full name:</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Full name" required>
+                            <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Full name" maxlength="60" required>
                         </div>
                     </div>
 
@@ -66,7 +72,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2 col-md-3" for="username">Username:</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
+                            <input type="text" class="form-control" name="username" id="username" placeholder="Username" maxlength="30" required>
                         </div>
                     </div>
 
@@ -74,7 +80,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2 col-md-3" for="password">Password:</label>
                         <div class="col-sm-7">
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Password" maxlength="60" required>
                         </div>
                     </div>
 
@@ -82,21 +88,19 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2 col-md-3" for="email">E-mail:</label>
                         <div class="col-sm-7">
-                            <input type="email" class="form-control" name="email" id="email" placeholder="yourname@example.com" required>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="yourname@example.com" maxlength="60" required>
                         </div>
                     </div>
 
-                    <input type="hidden" name="action" value="signup">
-
                     <!-- Odeslani -->
                     <div class="form-group">
-                        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-7 col-sm-2 col-md-offset-7 col-md-3 "> <!--col-xs-offset-9 col-xs-2-->
-                            <input type="submit" name="signup-form" class="btn" value="Sign up">
+                        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-7 col-sm-2 col-md-offset-7 col-md-3 ">
+                            <input type="submit" class="btn" value="Sign up">
                         </div>
                     </div>
 
                     <!-- Uzivatel jiz existuje -->
-                    {% if user_exists %}
+                    {% if user_exists == 1 %}
                     <div class="alert alert-danger alert-dismissible" id="alert1">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         <strong><span class="glyphicon glyphicon-exclamation-sign"></span>

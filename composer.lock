@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "099aa75da2fe6a4b4f15707bce87d7f2",
+    "content-hash": "9557c962a50a8a7eccf1d8cc6a0ef133",
     "packages": [
         {
             "name": "components/jquery",
@@ -47,6 +47,48 @@
             "description": "jQuery JavaScript Library",
             "homepage": "http://jquery.com",
             "time": "2018-03-04T13:23:48+00:00"
+        },
+        {
+            "name": "php-kit/ext-pdo",
+            "version": "1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-kit/ext-pdo.git",
+                "reference": "b94bf1805b75ba114e4a216dbca441ca7dc893be"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-kit/ext-pdo/zipball/b94bf1805b75ba114e4a216dbca441ca7dc893be",
+                "reference": "b94bf1805b75ba114e4a216dbca441ca7dc893be",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpKit\\ExtPDO\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Claudio Silva",
+                    "email": "claudio.silva@impactwave.com"
+                },
+                {
+                    "name": "Impactwave",
+                    "email": "impactwave@impactwave.com",
+                    "homepage": "http://impactwave.com"
+                }
+            ],
+            "description": "An extension to the standard PHP PDO API",
+            "homepage": "https://github.com/php-kit/ext-pdo",
+            "time": "2018-04-06T12:17:27+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -171,12 +213,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "92de1e831b7a8422edfb6e3a681d0dff4d8dea95"
+                "reference": "4c547f2175b9a05aa43551f6927da83fe249ce42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/92de1e831b7a8422edfb6e3a681d0dff4d8dea95",
-                "reference": "92de1e831b7a8422edfb6e3a681d0dff4d8dea95",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/4c547f2175b9a05aa43551f6927da83fe249ce42",
+                "reference": "4c547f2175b9a05aa43551f6927da83fe249ce42",
                 "shasum": ""
             },
             "replace": {
@@ -214,7 +256,7 @@
                 "responsive",
                 "web"
             ],
-            "time": "2018-11-18T08:00:03+00:00"
+            "time": "2018-12-13T23:45:51+00:00"
         },
         {
             "name": "twig/twig",
@@ -222,12 +264,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "ba7fdd9122af0601c04792f4b697d5daa997ccfa"
+                "reference": "02587c7f0c2c988128c4b3002c77e34d9527e8b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ba7fdd9122af0601c04792f4b697d5daa997ccfa",
-                "reference": "ba7fdd9122af0601c04792f4b697d5daa997ccfa",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/02587c7f0c2c988128c4b3002c77e34d9527e8b9",
+                "reference": "02587c7f0c2c988128c4b3002c77e34d9527e8b9",
                 "shasum": ""
             },
             "require": {
@@ -238,7 +280,7 @@
             "require-dev": {
                 "psr/container": "^1.0",
                 "symfony/debug": "^2.7",
-                "symfony/phpunit-bridge": "^3.3"
+                "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
             },
             "type": "library",
             "extra": {
@@ -281,7 +323,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2018-11-30T06:25:29+00:00"
+            "time": "2018-12-11T07:16:20+00:00"
         }
     ],
     "packages-dev": [],

@@ -12,18 +12,12 @@ class LoginManager
     private $user = "user"; // nazev sessny pro jmeno
 
     public function __construct(){
-        include_once("src/controllers/session.class.php");
+        include_once("session.class.php");
         $this->ses = new Session;
     }
 
-    public function login($userName){
-        include_once("src/models/database.class.php");
-        $db = new Database();
-        $user = $db->DBSelectOne("users", "*", array(array("column" => "login", "value" => $userName, "symbol" => "=")), "");
-        if (isset($user)){
-            $this->ses->addToSession($this->user, $user);
-            return $user;
-        }
+    public function login($user){
+        $this->ses->addToSession($this->user, $user);
     }
 
     public function logout(){
@@ -35,7 +29,7 @@ class LoginManager
     }
 
     public function getUser(){
-        return  $this->ses->readSession($this->user);;
+        return  $this->ses->readSession($this->user);
     }
 
 }

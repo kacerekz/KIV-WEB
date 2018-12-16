@@ -10,7 +10,8 @@ class Session
 {
 
     public function __construct(){
-        session_start(); // zahajim
+        session_start();
+        setcookie(session_name(),session_id(),time()+30*60);
     }
 
     public function addToSession($name, $value){

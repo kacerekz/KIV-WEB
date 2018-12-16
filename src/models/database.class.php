@@ -12,22 +12,13 @@ class Database
     private $connection;
 
     public function __construct() {
-        include ("settings.php");
-        global $db_server, $db_name, $db_user, $db_pass;
+        $db_server = "localhost";
+        $db_name = "web_con";
+        $db_user = "root";
+        $db_pass = "";
         $this->connection = new PDO("mysql:host=$db_server;dbname=$db_name", $db_user, $db_pass);
     }
 
-    /**
-     * Nacist 1 zaznam z tabulky v DB.
-     *
-     * @param string $table_name - jméno tabulky
-     * @param string $select_columns_string - jména sloupců oddělené čárkami, nebo jiné příkazy SQL
-     * @param array $where_array - seznam podmínek<br/>
-     * 							[] - column = sloupec; value - int nebo string nebo value_mysql = now(); symbol
-     * @param string $limit_string - doplnit limit string
-     * @return fuck you
-     *
-     */
     public function DBSelectOne($table_name, $select_columns_string, $where_array, $limit_string = "")
     {
         // PDO - MySQL
@@ -104,24 +95,16 @@ class Database
         }
         else
         {
-            echo "Chyba v dotazu - PDOStatement::errorInfo(): ";
-            printr($errors);
-            echo "SQL dotaz: $query";
+            echo "Error in query: ".$query;
+            echo "<pre>";
+            var_dump($errors);
+            echo "</pre>";
+
+            return null;
         }
     }
 
 
-    /**
-     * Nacist vsechny zaznamy z tabulky.
-     * Poznamka: tato metoda je stejna jako DBSelectOne - lisi se to jen posledni casti Fetch vs FetchAll
-     *
-     * @param unknown_type $table_name
-     * @param unknown_type $select_columns_string
-     * @param unknown_type $where_array
-     * @param unknown_type $limit_string
-     * @param array			$order_by_array - pouze pole stringu: [0] => {[column] = "", [sort] => "DESC"}
-     * @return mixed
-     */
     public function DBSelectAll($table_name, $select_columns_string, $where_array, $limit_string = "", $order_by_array = array())
     {
         // PDO - MySQL
@@ -183,7 +166,7 @@ class Database
 
 
         // 1) pripravit dotaz s dotaznikama
-        $query = "select $select_columns_string from `".$table_name."` $where_pom $order_by_pom $limit_string;";
+        $query = "select $select_columns_string from `$table_name` $where_pom $order_by_pom $limit_string;";
         //echo $query;
 
         // 2) pripravit si statement
@@ -226,18 +209,15 @@ class Database
         }
         else
         {
-            echo "Chyba v dotazu - PDOStatement::errorInfo(): ";
-            printr($errors);
-            echo "SQL dotaz: $query";
+            echo "Error in query: ".$query;
+            echo "<pre>";
+            var_dump($errors);
+            echo "</pre>";
+
+            return null;
         }
     }
 
-    /**
-     * Pridat polozku do DB - zakladni verze bez mysl fci typu now().
-     *
-     * @param unknown_type $table_name
-     * @param array $item - musi byt ve stejne podobe jako DB.
-     */
     public function DBInsert($table_name, $item)
     {
         // MySql
@@ -295,22 +275,19 @@ class Database
         }
         else
         {
-            echo "Chyba v dotazu - PDOStatement::errorInfo(): ";
-            printr($errors);
-            echo "SQL dotaz: $query";
+            echo "Error in query: ".$query;
+            echo "<pre>";
+            var_dump($errors);
+            echo "</pre>";
+
+            return null;
         }
     }
 
-
-    /**
-     * Pridat polozku do DB - rozsirena verze.
-     *
-     * @param string $table_name
-     * @param array $item - column = sloupec; value - int nebo string nebo value_mysql
-     */
     public function DBInsertExpanded($table_name, $item)
     {
         // MySql
+        $mysql_pdo_error = false;
 
         // SLOZIT TEXT STATEMENTU s otaznikama
         $insert_columns = "";
@@ -379,9 +356,12 @@ class Database
         }
         else
         {
-            echo "Chyba v dotazu - PDOStatement::errorInfo(): ";
-            printr($errors);
-            echo "SQL dotaz: $query";
+            echo "Error in query: ".$query;
+            echo "<pre>";
+            var_dump($errors);
+            echo "</pre>";
+
+            return null;
         }
     }
 
@@ -453,37 +433,81 @@ class Database
         }
         else
         {
-            echo "Chyba v dotazu - PDOStatement::errorInfo(): ";
-            printr($errors);
-            echo "SQL dotaz: $query";
+            echo "Error in query: ".$query;
+            echo "<pre>";
+            var_dump($errors);
+            echo "</pre>";
         }
     }
 
+    public function DBUpdateExpanded($table_name, $item_array, $where_array , $limit_string = ""){
+        // ITEM podminky ******************************************
+        $item_temp = "";
 
-    /**
-     * Upravit polozku v DB.
-     *
-     * @param $table_name - jméno tabulky
-     * @param $where_array - seznam podmínek - muze tam byt podminka na ID + ještě na něco dalšího<br/>
-     * 							[] - column = sloupec; value - int nebo string nebo value_mysql = now(); symbol
-     * 				priklad:    [] - column = id; value - 3; symbol =
-     * @param $item_expanded - upravovana pole<br/>
-     * 							[] - column = sloupec; value - int nebo string nebo value_mysql = now();
-     */
-    public function DBUpdateExpanded($table_name, $where_array, $items_expanded, $limit_string = "")
-    {
-        // TODO tuto metodu si již musíte dopsat sami
+        if ($item_array != null){
+            foreach ($item_array as $column => $value){
+
+                if ($item_temp != "") $item_temp .= ",";
+                $item_temp .= "`$column`=?";
+            }
+        }
+
+        // WHERE podminky ******************************************
+        $where_temp = "";
+
+        if ($where_array != null){
+            foreach ($where_array as $index => $item){
+
+                if ($where_temp != "") $where_temp .= "AND ";
+
+                $column = $item["column"];
+                $symbol = $item["symbol"];
+
+                $where_temp .= "`$column` $symbol ? ";
+            }
+        }
+
+        if (trim($where_temp) != "") $where_temp = "where $where_temp";
+
+        // Priprava dotazu ******************************************
+
+
+        $query = "update `$table_name` set $item_temp $where_temp $limit_string;";
+        $statement = $this->connection->prepare($query);
+
+        $bind_num = 1;
+
+        // navazani menenych hodnot
+        if ($item_array != null){
+            foreach ($item_array as $column => $value){
+                $statement->bindValue($bind_num, $value);
+                $bind_num++;
+            }
+        }
+
+        // navazani hodnot where
+        if ($where_array != null){
+            foreach ($where_array as $index => $item){
+                $value = $item["value"];
+                $statement->bindValue($bind_num, $value);
+                $bind_num++;
+            }
+        }
+
+        // Vykonani dotazu
+        $statement->execute();
+
+        // Pripadny vypis chyb
+        $errors = $statement->errorInfo();
+        if ($errors[0] + 0 > 0){
+            echo "Error in query: ".$query;
+            echo "<pre>";
+            var_dump($errors);
+            echo "</pre>";
+        }
+
     }
 
-
-    /**
-     * Expanded version - smazat jeden nebo vice zaznamu z tabulky.
-     *
-     * @param string $table_name - jméno tabulky
-     * @param array $where_array - seznam podmínek<br/>
-     * 							[] - column = sloupec; value - int nebo string nebo value_mysql = now(); symbol
-     * @param string $limit_string - doplnit limit string
-     */
     public function DBDelete($table_name, $where_array, $limit_string)
     {
         // PDO - MySQL
@@ -566,9 +590,10 @@ class Database
         }
         else
         {
-            echo "Chyba v dotazu - PDOStatement::errorInfo(): ";
-            printr($errors);
-            echo "SQL dotaz: $query";
+            echo "Error in query: ".$query;
+            echo "<pre>";
+            var_dump($errors);
+            echo "</pre>";
         }
     }
 }

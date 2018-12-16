@@ -13,7 +13,7 @@ class Home extends Controller
     public function viewPage($data){
 
         echo "<pre style='margin-top: 60px'>";
-        var_dump($_SESSION);
+        var_dump($data/*$_SESSION*/);
         echo "</pre>";
 
         parent::viewPage($data);
