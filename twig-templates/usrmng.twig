@@ -1,6 +1,78 @@
 {% extends "base.twig" %}
 {% block content %}
 
+    <!-- Makro na vypis uzivatele -->
+    {% macro print(user)%}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.login }}</td>
+            <td>{{ user.email }}</td>
+
+            <td>
+                <form action="../src/form-processing/change-user.php" method="post">
+                    <input type="hidden" name="user_id" value={{ user.id_user }}>
+
+                    <select class="my-select" name="rights-select">
+
+                        <option value="1"
+                            {% if user.rights_id_rights == 1 %} selected="selected" {% endif %}
+                        >Author</option>
+
+                        <option value="2"
+                            {% if user.rights_id_rights == 2 %} selected="selected" {% endif %}
+                        >Reviewer</option>
+
+                        <option value="3"
+                            {% if user.rights_id_rights == 3 %} selected="selected" {% endif %}
+                        >Admin</option>
+                    </select>
+
+                    <input type="submit" class="btn delete-usr" value="Change">
+                </form>
+            </td>
+
+            <td>
+                <form action="../src/form-processing/block-user.php" method="post">
+                    <input type="hidden" name="user_id" value={{ user.id_user }}>
+                    <input type="hidden" name="blocked" value={{ user.blocked }}>
+
+                    {% if user.blocked == 0 %}
+                        <input type="submit" class="btn delete-usr" value="Block">
+                    {% elseif user.blocked == 1 %}
+                        <input type="submit" class="btn delete-usr" value="Unblock">
+                    {% endif %}
+                </form>
+            </td>
+
+            <td><button class="btn delete-usr" data-toggle="modal" data-target="#myModal{{ user.id_user }}">Delete</button></td>
+        </tr>
+
+        <div id="myModal{{ user.id_user }}" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><b>Delete user</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Do you really want to delete this user forever?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <form action="../src/form-processing/delete-user.php" method="post">
+                            <input type="hidden" name="user_id" value={{ user.id_user }}>
+                            <input type="submit" class="btn delete-btn" value="Delete">
+                        </form>
+                        <button type="button" class="btn btn-default cancel" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    {% endmacro %}
+
     <div class="container">
 
         <h2>Manage users</h2>
@@ -14,17 +86,17 @@
                     <th>Full name</th>
                     <th>Username</th>
                     <th>E-mail</th>
+                    <th id="rights-col">Rights</th>
+                    <th id="block-col">Block</th>
                     <th id="delete-col">Delete</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr>
-                    <td>Sam One</td>
-                    <td>s0m31</td>
-                    <td>sam.one@example.com</td>
-                    <td><button class="btn delete-usr">Delete</button></td>
-                </tr>
+                {% import _self as printer %}
+                {% for u in users %}
+                    {{ printer.print(u) }}
+                {% endfor %}
                 </tbody>
             </table>
 

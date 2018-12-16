@@ -10,8 +10,8 @@ class Session
 {
 
     public function __construct(){
+        session_set_cookie_params(0);
         session_start();
-        setcookie(session_name(),session_id(),time()+30*60);
     }
 
     public function addToSession($name, $value){

@@ -17,7 +17,7 @@ if (isset($user['login'])){
         array("column" => "pass",               "value" => password_hash($_POST['password'], PASSWORD_DEFAULT)),
         array("column" => "email",              "value" => $_POST['email']),
         array("column" => "rights_id_rights",   "value" => "1"),
-        array("column" => "blacklisted",          "value" => "0"))
+        array("column" => "blocked",          "value" => "0"))
     );
 
 

@@ -46,6 +46,14 @@
                         </div>
                     {% endif %}
 
+                    {% if blocked == 1 %}
+                        <div class="alert alert-danger alert-dismissible" id="alert1">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong><span class="glyphicon glyphicon-exclamation-sign"></span>
+                                User blocked.</strong> Please contact us for details and resolution.
+                        </div>
+                    {% endif %}
+
                 </form>
             </div>
 

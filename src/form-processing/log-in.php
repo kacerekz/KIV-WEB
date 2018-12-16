@@ -10,9 +10,15 @@ $user = $db->DBSelectOne("users", "*", array(
 
 
 if (isset($user['pass']) && password_verify($_POST['password'], trim($user['pass']))){
-    $lm->login($user);
-    header("Location: ../../index.php?page=home");
-    exit;
+
+    if ($user['blocked'] == 0){
+        $lm->login($user);
+        header("Location: ../../index.php?page=home");
+        exit;
+    } else {
+        header("Location: ../../index.php?page=login&blocked=true");
+        exit;
+    }
 
 } else {
     header("Location: ../../index.php?page=login&success=false");

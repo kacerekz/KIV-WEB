@@ -11,6 +11,7 @@ require("controller.class.php");
 class Login extends Controller
 {
     public function viewPage($data){
+
         if (isset($_GET['unique']) && $_GET['unique'] == "false"){
             $data['user_exists'] = 1;
             unset($_GET['unique']);
@@ -20,9 +21,16 @@ class Login extends Controller
 
         if (isset($_GET['success']) && $_GET['success'] == "false"){
             $data['wrong_login'] = 1;
-            unset($_GET['unique']);
+            unset($_GET['success']);
         } else {
             $data['wrong_login'] = 0;
+        }
+
+        if (isset($_GET['blocked']) && $_GET['blocked'] == "true"){
+            $data['blocked'] = 1;
+            unset($data['blocked']);
+        } else {
+            $data['blocked'] = 0;
         }
 
         $data["cssfile"] = array("css/login.css", "css/form.css");

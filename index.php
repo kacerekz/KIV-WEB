@@ -19,23 +19,19 @@ if(isset($_GET["logout"]) && $_GET["logout"]=="true"){
     $login->logout();
 }
 
-
 if ($login->isUserLoged()){
     $data['user'] = $login->getUser();
 
-    // Prodlouzi platnost prihlaseni, NEBO UZIVATELE ODHLASI POKUD JE NA BLACKLISTU
-    include("src/models/database.class.php");
+    // Odhlasi uzivatele pokud jiz neni v databazi
+    include_once ("src/models/database.class.php");
     $db = new Database();
 
     $user = $db->DBSelectOne("users", "*", array(
         array("column"=>"ID_USER", "symbol" => "=", "value" => $data['user']['id_user'])));
 
-    if ($user['blacklisted'] == 1){
-        setcookie(session_name(),session_id(),time()+0);
-    } else {
+    if (!isset($user)){
         $login->logout();
     }
-
 }
 
 // Zjisti pozadovanou stranku z URL ************************
