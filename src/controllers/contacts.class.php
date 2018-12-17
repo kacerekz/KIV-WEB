@@ -6,12 +6,14 @@
  * Time: 2:47 PM
  */
 
-require("controller.class.php");
+require_once "controller.class.php";
 
 class Contacts extends Controller
 {
+    public $auth = array("0", "1", "2", "3");
+
     public function viewPage($data){
-        include("src/models/database.class.php");
+        include_once ("src/models/database.class.php");
         $db = new Database();
         $contacts = $db->DBSelectAll("contacts", "*", array());
         $data['contacts'] = $contacts;

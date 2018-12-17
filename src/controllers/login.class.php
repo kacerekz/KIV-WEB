@@ -6,37 +6,84 @@
  * Time: 2:48 PM
  */
 
-require("controller.class.php");
+require_once "controller.class.php";
 
 class Login extends Controller
 {
+    public $auth = array("0");
+
     public function viewPage($data){
 
-        if (isset($_GET['unique']) && $_GET['unique'] == "false"){
-            $data['user_exists'] = 1;
-            unset($_GET['unique']);
-        } else {
-            $data['user_exists'] = 0;
-        }
+        if (isset($_POST['login']) || isset($_POST['signup'])){
 
-        if (isset($_GET['success']) && $_GET['success'] == "false"){
-            $data['wrong_login'] = 1;
-            unset($_GET['success']);
-        } else {
-            $data['wrong_login'] = 0;
-        }
+            include_once ("src/models/database.class.php");
+            $db = new Database();
 
-        if (isset($_GET['blocked']) && $_GET['blocked'] == "true"){
-            $data['blocked'] = 1;
-            unset($data['blocked']);
-        } else {
-            $data['blocked'] = 0;
+            // PRIHLASENI, kontrola hesla & zda neni uzivatel zablokovany
+            if (isset($_POST['login'])){
+
+                $login = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+                $pass = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+
+                $user = $db->DBSelectOne("users", "*", array(
+                    array("column"=>"login", "symbol" => "=", "value" => $login)));
+
+                // Overeni udaju
+                if (password_verify($pass, $user['pass'])){
+                    // Neni uzivatel zablokovany?
+                    if ($user['blocked'] == 0){
+                        $data['lm']->login($user);
+                        header("Location: ../../index.php");
+                        exit;
+
+                    } else {
+                        $data['blocked_user'] = true;
+                    }
+                    // Spatne udaje
+                } else {
+                    $data['wrong_login'] = true;
+                }
+
+
+                // REGISTRACE, kontrola, ze neexistuje stejny login
+            } else {
+
+                $fullname = filter_var($_POST['fullname'], FILTER_SANITIZE_STRING);
+                $login = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+                $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+
+                $user = $db->DBSelectOne("users", "login", array(
+                    array("column"=>"login", "symbol" => "=", "value" => $login)));
+
+                // Neexistuje jiz stejny login?
+                if (!$user){
+                    $data['usrname_not_unique'] = 1;
+
+                } else {
+                    $db->DBInsertExpanded("users", array(
+                            array("column" => "name",               "value" => $fullname),
+                            array("column" => "login",              "value" => $login),
+                            array("column" => "pass",               "value" => password_hash($_POST['password'], PASSWORD_DEFAULT)),
+                            array("column" => "email",              "value" => $email),
+                            array("column" => "rights_id_rights",   "value" => "1"),
+                            array("column" => "blocked",          "value" => "0"))
+                    );
+
+                    $user = $db->DBSelectOne("users", "*", array(
+                        array("column"=>"login", "symbol" => "=", "value" => $login)));
+
+                    $data['lm']->login($user);
+                    header("Location: ../../index.php");
+                    exit;
+                }
+
+            }
         }
 
         $data["cssfile"] = array("css/login.css", "css/form.css");
 
         echo "<pre style='margin-top: 60px'>";
-        var_dump($_GET/*$data/*$_SESSION*/);
+        var_dump($_POST);
         echo "</pre>";
 
         parent::viewPage($data);

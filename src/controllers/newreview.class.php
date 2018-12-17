@@ -6,10 +6,12 @@
  * Time: 2:47 PM
  */
 
-require("controller.class.php");
+require_once "controller.class.php";
 
 class NewReview extends Controller
 {
+    public $auth = array("2");
+
     public function viewPage($data){
         $data["scripts"] = array("https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js");
         parent::viewPage($data);

@@ -6,10 +6,12 @@
  * Time: 10:08 PM
  */
 
-require("controller.class.php");
+require_once "controller.class.php";
 
-class Error404 extends Controller
+class Errors extends Controller
 {
+    public $auth = array("0", "1", "2", "3");
+
     public function viewPage($data){
         parent::viewPage($data);
     }

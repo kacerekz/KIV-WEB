@@ -2,15 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: PC
- * Date: 06-Dec-18
- * Time: 10:05 PM
+ * Date: 17-Dec-18
+ * Time: 6:25 PM
  */
 
 require_once "controller.class.php";
-
-class Reviews extends Controller
+class Settings extends Controller
 {
-    public $auth = array("2");
+    public $auth = array("1", "2", "3");
 
     public function viewPage($data){
         parent::viewPage($data);

@@ -5,3 +5,35 @@
 #review {
     text-align: center;
 }
+
+.reviewer-col {
+    width: 10%;
+}
+
+.action-col {
+    width: 7%;
+}
+
+.action2-col {
+    width: 7%;
+}
+
+.num-col {
+    width: 5%;
+}
+
+.success:hover, .success:focus {
+    background-color: #f4ffef;
+}
+
+.danger {
+    margin-top: 10px;
+}
+
+.danger:hover, .danger:focus {
+    background-color: #ffefef;
+}
+
+.my-table-btn {
+    width: 70px;
+}

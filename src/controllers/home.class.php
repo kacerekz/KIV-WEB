@@ -6,10 +6,12 @@
  * Time: 8:26 PM
  */
 
-require("controller.class.php");
+require_once "controller.class.php";
 
 class Home extends Controller
 {
+    public $auth = array("0", "1", "2", "3");
+
     public function viewPage($data){
 
         echo "<pre style='margin-top: 60px'>";

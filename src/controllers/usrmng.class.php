@@ -6,11 +6,14 @@
  * Time: 10:04 PM
  */
 
-require("controller.class.php");
+require_once "controller.class.php";
 
 class UsrMng extends Controller
 {
+    public $auth = array("3");
+
     public function viewPage($data){
+        include_once ("src/models/database.class.php");
         $db = new Database();
         $users = $db->DBSelectAll("users", "id_user, name, login, email, rights_id_rights, blocked", array());
         $data['users'] = $users;

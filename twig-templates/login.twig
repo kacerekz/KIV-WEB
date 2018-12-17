@@ -6,7 +6,7 @@
 
             <!-- Prihlaseni -->
             <div class="col-md-5">
-                <form class="form-horizontal" action="../src/form-processing/log-in.php" method="post">
+                <form class="form-horizontal" action="index.php?page=login" method="post">
 
                     <!-- Nadpis -->
                     <div class="form-group">
@@ -34,11 +34,11 @@
                     <!-- Odeslani -->
                     <div class="form-group">
                         <div class="col-xs-offset-1 col-xs-10 col-sm-offset-7 col-sm-2 col-md-offset-7 col-md-3 ">
-                            <input type="submit" class="btn" value="Log in">
+                            <input type="submit" name="login" class="btn" value="Log in">
                         </div>
                     </div>
 
-                    {% if wrong_login == 1 %}
+                    {% if wrong_login is defined %}
                         <div class="alert alert-danger alert-dismissible" id="alert1">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <strong><span class="glyphicon glyphicon-exclamation-sign"></span>
@@ -46,7 +46,7 @@
                         </div>
                     {% endif %}
 
-                    {% if blocked == 1 %}
+                    {% if blocked_user is defined %}
                         <div class="alert alert-danger alert-dismissible" id="alert1">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <strong><span class="glyphicon glyphicon-exclamation-sign"></span>
@@ -59,7 +59,7 @@
 
             <!-- Registrace -->
             <div class="col-md-7 vdiv">
-                <form class="form-horizontal" action="../src/form-processing/signup.php" method="post">
+                <form class="form-horizontal" action="index.php?page=login" method="post">
 
                     <!-- Nadpis -->
                     <div class="form-group">
@@ -103,12 +103,12 @@
                     <!-- Odeslani -->
                     <div class="form-group">
                         <div class="col-xs-offset-1 col-xs-10 col-sm-offset-7 col-sm-2 col-md-offset-7 col-md-3 ">
-                            <input type="submit" class="btn" value="Sign up">
+                            <input type="submit" name="signup" class="btn" value="Sign up">
                         </div>
                     </div>
 
                     <!-- Uzivatel jiz existuje -->
-                    {% if user_exists == 1 %}
+                    {% if usrname_not_unique is defined %}
                     <div class="alert alert-danger alert-dismissible" id="alert1">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         <strong><span class="glyphicon glyphicon-exclamation-sign"></span>

@@ -1,24 +1,9 @@
-.delete-usr {
-    background-color: #e5e5e5;
-    color: #353535;
-    padding: 3px 5px;
-}
-
-.delete-usr:hover, .delete-usr:focus {
-    background-color: #ffffff;
-    color: #353535;
-}
-
 #delete-col, #block-col{
     width: 5%;
 }
 
 #rights-col{
     width: 25%;
-}
-
-.modal-footer {
-    border-top: none;
 }
 
 .cancel {
@@ -31,20 +16,4 @@
     border: none;
     background-color: #ffffff;
     color: #353535;
-}
-
-.my-select {
-    width: 100px;
-    height: 26px;
-    border-radius: 5px;
-    border: 1px solid lightgray;
-    vertical-align: middle;
-    background: white;
-    padding-left: 5px;
-}
-
-@media screen and (max-width: 991px) {
-    .my-select {
-        width: 85px;
-    }
 }

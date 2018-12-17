@@ -26,7 +26,7 @@
                         >Admin</option>
                     </select>
 
-                    <input type="submit" class="btn delete-usr" value="Change">
+                    <input type="submit" class="btn my-table-btn" value="Change">
                 </form>
             </td>
 
@@ -36,14 +36,14 @@
                     <input type="hidden" name="blocked" value={{ user.blocked }}>
 
                     {% if user.blocked == 0 %}
-                        <input type="submit" class="btn delete-usr" value="Block">
+                        <input type="submit" class="btn my-table-btn" value="Block">
                     {% elseif user.blocked == 1 %}
-                        <input type="submit" class="btn delete-usr" value="Unblock">
+                        <input type="submit" class="btn my-table-btn" value="Unblock">
                     {% endif %}
                 </form>
             </td>
 
-            <td><button class="btn delete-usr" data-toggle="modal" data-target="#myModal{{ user.id_user }}">Delete</button></td>
+            <td><button class="btn my-table-btn" data-toggle="modal" data-target="#myModal{{ user.id_user }}">Delete</button></td>
         </tr>
 
         <div id="myModal{{ user.id_user }}" class="modal fade" role="dialog">

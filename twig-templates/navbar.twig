@@ -29,7 +29,7 @@
             {% if user is defined %}
 
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"> {{ user.login }}
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"> {{ user.login | raw }}
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         {% if user.rights_id_rights == 1 %} <li><a href="index.php?page=articles">My articles</a></li> {% endif %}

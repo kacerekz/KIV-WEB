@@ -6,13 +6,17 @@
  * Time: 2:47 PM
  */
 
-require("controller.class.php");
+require_once "controller.class.php";
 
 class NewArticle extends Controller
 {
+    public $auth = array("1");
+
+
     public function viewPage($data){
 
         if (isset($_POST['mode']) && $_POST['mode'] == "edit"){
+            include_once ("src/models/database.class.php");
             $db = new Database();
 
             $data["post"] = $db->DBSelectOne("posts", "*",

@@ -9,6 +9,7 @@
 class Controller
 {
     protected $twig;
+    public $auth = array();
 
     public function __construct($twig) {
         $this->twig = $twig;
