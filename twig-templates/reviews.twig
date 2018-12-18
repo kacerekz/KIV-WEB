@@ -1,6 +1,17 @@
 {% extends "base.twig" %}
 {% block content %}
 
+    {% macro print(post) %}
+
+        <td>{{ post.title }}</td>
+        <td>{{ post.author }}</td>
+        <td><span class="glyphicon glyphicon-edit"></span></td>
+        <td>{%if post.review is defined %} {{ post.review.lang + post.review.acc + post.review.orig }}{% endif %}</td>
+        <td><button class="btn submit">Submit</button></td>
+
+    {% endmacro %}
+
+
 <div class="container">
 
         <h2>Articles for review</h2>
@@ -19,11 +30,10 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>50,000</td>
-                    <td>30,000</td>
-                    <td><span class="glyphicon glyphicon-edit"></span></td>
-                    <td>30,000</td>
-                    <td><button class="btn submit">Submit</button></td>
+                    {% import _self as printer %}
+                    {% for a in articles %}
+                        {{ printer.print(a) }}
+                    {% endfor %}
                 </tr>
                 </tbody>
             </table>

@@ -22,16 +22,21 @@
     width: 5%;
 }
 
+.success {
+    background-color: #e5ffdc;
+}
+
 .success:hover, .success:focus {
     background-color: #f4ffef;
 }
 
 .danger {
+    background-color: #ffe6ed;
     margin-top: 10px;
 }
 
 .danger:hover, .danger:focus {
-    background-color: #ffefef;
+    background-color: #ffeff4;
 }
 
 .my-table-btn {

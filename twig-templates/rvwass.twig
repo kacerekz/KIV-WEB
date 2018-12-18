@@ -9,9 +9,9 @@
 
             {% import _self as printer %}
             {% if post.review1 is defined %}
-                {{ printer.printRev(post, post.review1) }}
+                {{ printer.printRev(post, post.reviewer1) }}
             {% else %}
-                {{ printer.printEmpty(post, reviewers) }}
+                {{ printer.printEmpty(post, reviewers, 1) }}
             {% endif %}
 
             <td rowspan="3">
@@ -26,18 +26,18 @@
         <tr>
             {% import _self as printer %}
             {% if post.review2 is defined %}
-                {{ printer.printRev(post, post.review2) }}
+                {{ printer.printRev(post, post.reviewer2) }}
             {% else %}
-                {{ printer.printEmpty(post, reviewers) }}
+                {{ printer.printEmpty(post, reviewers, 2) }}
             {% endif %}
         </tr>
 
         <tr>
             {% import _self as printer %}
             {% if post.review3 is defined %}
-                {{ printer.printRev(post, post.review3) }}
+                {{ printer.printRev(post, post.reviewer3) }}
             {% else %}
-                {{ printer.printEmpty(post, reviewers) }}
+                {{ printer.printEmpty(post, reviewers, 3) }}
             {% endif %}
 
         </tr>
@@ -48,7 +48,7 @@
     {% macro printRev(post, reviewer)%}
         <!-- Pokud to cele neni obalene ve form, vklada se padding ktereho se neda zbavit -->
         <form action="../src/form-processing/reviews.php" method="post">
-            <td>{{ reviewer.name }}</td>
+            <td>{{ reviewer.login }}</td>
             {% if reviewer.review is defined %}
                 <td>{{ reviewer.review.acc }}</td>
                 <td>{{ reviewer.review.orig }}</td>
@@ -69,40 +69,40 @@
     {% endmacro %}
 
     <!-- Makro na vypis nabidky recenzentu  -->
-    {% macro printEmpty(post, reviewers)%}
+    {% macro printEmpty(post, reviewers, num)%}
         <form action="../src/form-processing/reviews.php" method="post">
             <input type="hidden" name="post_id" value="{{ post.id_posts }}">
 
             <td>
-                <select class="my-select" name="rev-select">
-                    {% import _self as printer %}
-                    {% for r in reviewers %}
-                        {{ printer.printRevSel(post, r) }}
-                    {% endfor %}
+                <select class="my-select" name="rev-select"  {% if num != (post.review_count+1) %} disabled {% endif %}>
+                    {% if num == (post.review_count+1) %}
+                        {% import _self as printer %}
+                        {% for r in reviewers %}
+                            {{ printer.printRevSel(post, r) }}
+                        {% endfor %}
+                    {% endif %}
                 </select>
             </td>
 
             <td></td><td></td><td></td><td></td><td></td>
 
-            <td><input type="submit" class="btn my-table-btn" value="Assign"></td>
+            <td><input type="submit" class="btn my-table-btn" value="Assign" {% if num != (post.review_count+1) %} disabled {% endif %}></td>
         </form>
     {% endmacro %}
 
 
     {% macro printRevSel(post, reviewer)%}
-        {% if post.review_id1 != reviewer.id_user and  post.review_id2 != reviewer.id_user and post.review_id3 != reviewer.id_user %}
-            <option value="{{ reviewer.id_user }}">{{ reviewer.name }}</option>
+        {% if post.reviewer_id1 != reviewer.id_user and  post.reviewer_id2 != reviewer.id_user and post.reviewer_id3 != reviewer.id_user %}
+            <option value="{{ reviewer.id_user }}">{{ reviewer.login }}</option>
         {% endif %}
     {% endmacro %}
-
-
 
     <div class="container">
         <h2>Assign reviews</h2>
         <hr>
         <div class="table-responsive">
 
-            <table class="table table-striped table-hover">
+            <table class="table">
                 <thead>
                 <tr>
                     <th rowspan="2">Article</th>
@@ -124,7 +124,7 @@
                 <tr>
                     {% import _self as printer %}
                     {% for a in articles %}
-                        {{ printer.print(a, a.reviewers) }}
+                        {{ printer.print(a, reviewers) }}
                     {% endfor %}
                 </tr>
                 </tbody>

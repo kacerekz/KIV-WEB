@@ -33,7 +33,7 @@ class Login extends Controller
                     // Neni uzivatel zablokovany?
                     if ($user['blocked'] == 0){
                         $data['lm']->login($user);
-                        header("Location: ../../index.php");
+                        header("Location: index.php?page=home");
                         exit;
 
                     } else {
@@ -50,20 +50,21 @@ class Login extends Controller
 
                 $fullname = filter_var($_POST['fullname'], FILTER_SANITIZE_STRING);
                 $login = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
-                $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+                $email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
+                $pass = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 
                 $user = $db->DBSelectOne("users", "login", array(
                     array("column"=>"login", "symbol" => "=", "value" => $login)));
 
                 // Neexistuje jiz stejny login?
-                if (!$user){
+                if (isset($user['login'])){
                     $data['usrname_not_unique'] = 1;
 
                 } else {
                     $db->DBInsertExpanded("users", array(
                             array("column" => "name",               "value" => $fullname),
                             array("column" => "login",              "value" => $login),
-                            array("column" => "pass",               "value" => password_hash($_POST['password'], PASSWORD_DEFAULT)),
+                            array("column" => "pass",               "value" => password_hash($pass, PASSWORD_DEFAULT)),
                             array("column" => "email",              "value" => $email),
                             array("column" => "rights_id_rights",   "value" => "1"),
                             array("column" => "blocked",          "value" => "0"))
@@ -73,7 +74,8 @@ class Login extends Controller
                         array("column"=>"login", "symbol" => "=", "value" => $login)));
 
                     $data['lm']->login($user);
-                    header("Location: ../../index.php");
+
+                    header("Location: index.php?page=home");
                     exit;
                 }
 
