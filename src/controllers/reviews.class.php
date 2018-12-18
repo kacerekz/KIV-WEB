@@ -19,15 +19,14 @@ class Reviews extends Controller
         $articles = array();
 
         for ($i = 1; $i<=3; $i++){
-            array_push($articles,
-                $db->DBSelectAll("posts", "*", array(
-                    array("column"=>"reviewer_id".$i, "symbol"=>"=", "value"=>$data['user']['id_user'])))
+            $articles_temp = $db->DBSelectAll("posts", "*", array(
+                    array("column"=>"reviewer_id".$i, "symbol"=>"=", "value"=>$data['user']['id_user']))
             );
-        }
 
-        echo "<pre style='margin-top: 60px'>";
-        var_dump($_POST);
-        echo "</pre>";
+            foreach ($articles_temp as $article){
+                $articles[] = $article;
+            }
+        }
 
         foreach ($articles as $article){
 
@@ -40,6 +39,6 @@ class Reviews extends Controller
         }
 
 
-        //parent::viewPage($data);
+        parent::viewPage($data);
     }
 }

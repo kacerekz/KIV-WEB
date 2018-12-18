@@ -1,18 +1,43 @@
 {% extends "base.twig" %}
 {% block content %}
 
-    {% macro print(post) %}
+    {% macro print(post, user) %}
+        <tr>
+            <td>{{ post.title }}</td>
+            <td>{{ post.author.login }}</td>
 
-        <td>{{ post.title }}</td>
-        <td>{{ post.author }}</td>
-        <td><span class="glyphicon glyphicon-edit"></span></td>
-        <td>{%if post.review is defined %} {{ post.review.lang + post.review.acc + post.review.orig }}{% endif %}</td>
-        <td><button class="btn submit">Submit</button></td>
+            <td>
+                <form action="index.php?page=newreview" method="post">
+                    <input type="hidden" name="post_id" value={{ post.id_posts }}>
+                    <input type="hidden" name="user_id" value={{ user.id_user }}>
+                    {% if post.review is not defined %}
+                        <button type="submit" class="btn edit-btn">
+                            <span class="glyphicon glyphicon-pencil"></span>  Review
+                        </button>
+                    {% else %}
+                        <button type="submit"><span class="glyphicon glyphicon-edit"></span></button>
+                    {% endif %}
+                </form>
+            </td>
 
+            <td>
+                {% if post.review is defined and post.review.status == 2 %}
+                    {% if post.review.datetime < post.datetime %}
+                        Article changed.
+                    {% else %}
+                        Up to date.
+                    {% endif %}
+
+                {% elseif post.review.status == 1 %}
+                    <button class="btn submit">Submit</button>
+                {% endif %}
+            </td>
+
+        </tr>
     {% endmacro %}
 
 
-<div class="container">
+    <div class="container">
 
         <h2>Articles for review</h2>
         <hr>
@@ -24,17 +49,14 @@
                     <th>Article</th>
                     <th>Author</th>
                     <th id="link-col">Review</th>
-                    <th id="sum-col">Sum</th>
                     <th id="status-col">Status</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    {% import _self as printer %}
-                    {% for a in articles %}
-                        {{ printer.print(a) }}
-                    {% endfor %}
-                </tr>
+                {% import _self as printer %}
+                {% for a in articles %}
+                    {{ printer.print(a) }}
+                {% endfor %}
                 </tbody>
             </table>
 

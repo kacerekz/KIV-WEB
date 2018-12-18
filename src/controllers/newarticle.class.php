@@ -22,7 +22,8 @@ class NewArticle extends Controller
             $data["post"] = $db->DBSelectOne("posts", "*",
                 array(
                     array("column" => "id_posts",   "symbol"=>"=",    "value" => $_POST['post_id'])
-                ));
+                )
+            );
         };
 
         $data["scripts"] = array("https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js");

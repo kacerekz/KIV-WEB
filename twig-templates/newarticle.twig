@@ -24,15 +24,17 @@
 
         <form class="form-horizontal" action="../src/form-processing/article.php" method="post">
 
-            <input type="hidden" name="user_id" value={{ user.id_user }}>
 
-            <!-- Takhle to musi byt jinak se vsechno rozpadne :)) Nejde to spojit s tlacitkem zpet,
-                    tlacitko pak chce vyplnit titulek.... -->
+            <!-- Takhle to musi byt jinak se vsechno rozpadne :)) -->
             <div class="form-group">
                 <div class="col-xs-offset-0 col-sm-offset-1 col-sm-8 col-md-9 col-lg-8">
+
+                    <input type="hidden" name="user_id" value={{ user.id_user }}>
+
                     {% if post is defined %}
                         <input type="hidden" name="post_id" value={{ post.id_posts }}>
                     {% endif %}
+
                 </div>
             </div>
 
