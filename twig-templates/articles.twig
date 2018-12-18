@@ -5,6 +5,10 @@
         <tr>
             <td>{{ post.title }}</td>
 
+            <td></td>
+            <td></td>
+            <td></td>
+
             <td>
                 <form action="index.php?page=newarticle" method="post">
                     <input type="hidden" name="post_id" value={{ post.id_posts }}>
@@ -21,10 +25,10 @@
                     Under review
 
                 {% elseif post.status == 3 %}
-                    <span class="glyphicon glyphicon-share"></span>Declined
+                    Declined
 
                 {% elseif post.status == 4 %}
-                    <span class="glyphicon glyphicon-share"></span>Accepted
+                    Accepted
 
                 {% endif %}
 
@@ -55,7 +59,10 @@
                 <thead>
                 <tr>
                     <th>Article</th>
-                    <th id="link-col"></th>
+                    <th class="link-col">Reviews</th>
+                    <th class="link-col"></th>
+                    <th class="link-col"></th>
+                    <th class="link-col">Edit</th>
                     <th id="status-col">Status</th>
                     <th id="delete-col">Delete</th>
                 </tr>

@@ -8,16 +8,25 @@
             <td rowspan="3">{{ post.author.name }}</td>
 
             {% import _self as printer %}
-            {% if post.review1 is defined %}
+            {% if post.reviewer1 is defined %}
                 {{ printer.printRev(post, post.reviewer1) }}
             {% else %}
                 {{ printer.printEmpty(post, reviewers, 1) }}
             {% endif %}
 
             <td rowspan="3">
-                <form action="../src/form-processing/reviews.php" method="post">
+                <form action="../src/form-processing/rvwass.php" method="post">
                     <input type="hidden" name="post_id" value="{{ post.id_posts }}">
-                    <input type="submit" name="accept" class="btn my-table-btn success" value="Accept">
+                    <input type="submit" name="accept" class="btn my-table-btn success" value="Accept"
+                            {% if post.reviewer1 is not defined
+                                or post.reviewer1.review.status != 2
+                                or post.reviewer2 is not defined
+                                or post.reviewer2.review.status != 2
+                                or post.reviewer3 is not defined
+                                or post.reviewer3.review.status != 2 %}
+                                disabled
+                            {% endif %}
+                    >
                     <input type="submit" name="decline" class="btn my-table-btn danger" value="Decline">
                 </form>
             </td>
@@ -25,7 +34,7 @@
 
         <tr>
             {% import _self as printer %}
-            {% if post.review2 is defined %}
+            {% if post.reviewer2 is defined %}
                 {{ printer.printRev(post, post.reviewer2) }}
             {% else %}
                 {{ printer.printEmpty(post, reviewers, 2) }}
@@ -34,7 +43,7 @@
 
         <tr>
             {% import _self as printer %}
-            {% if post.review3 is defined %}
+            {% if post.reviewer3 is defined %}
                 {{ printer.printRev(post, post.reviewer3) }}
             {% else %}
                 {{ printer.printEmpty(post, reviewers, 3) }}
@@ -47,9 +56,9 @@
     <!-- Makro na vypis jedne recenze -->
     {% macro printRev(post, reviewer)%}
         <!-- Pokud to cele neni obalene ve form, vklada se padding ktereho se neda zbavit -->
-        <form action="../src/form-processing/reviews.php" method="post">
+        <form action="../src/form-processing/rvwass.php" method="post">
             <td>{{ reviewer.login }}</td>
-            {% if reviewer.review is defined %}
+            {% if reviewer.review is defined and reviewer.review.status == 2 %}
                 <td>{{ reviewer.review.acc }}</td>
                 <td>{{ reviewer.review.orig }}</td>
                 <td>{{ reviewer.review.lang }}</td>
@@ -70,7 +79,7 @@
 
     <!-- Makro na vypis nabidky recenzentu  -->
     {% macro printEmpty(post, reviewers, num)%}
-        <form action="../src/form-processing/reviews.php" method="post">
+        <form action="../src/form-processing/rvwass.php" method="post">
             <input type="hidden" name="post_id" value="{{ post.id_posts }}">
 
             <td>

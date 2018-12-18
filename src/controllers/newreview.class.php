@@ -30,8 +30,13 @@ class NewReview extends Controller
                     array("column" => "users_id_user",   "symbol"=>"=",    "value" => $_POST['user_id'])
                 ));
 
+            if (!$data['review']){
+                unset($data['review']);
+            }
+
             $data["scripts"] = array("https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js");
             parent::viewPage($data);
+            exit;
         };
 
         header("Location: index.php");

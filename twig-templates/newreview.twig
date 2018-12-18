@@ -11,7 +11,7 @@
                     </button>
                 </a>
 
-                {% if post is defined %}
+                {% if review is defined %}
                     <h3>Edit review</h3>
                 {% else %}
                     <h3>New review</h3>
@@ -24,16 +24,17 @@
         </div>
 
 
-        <form class="form-horizontal" action="../src/form-processing/article.php" method="post">
+        <form class="form-horizontal" action="../src/form-processing/newreview.php" method="post">
 
             <!-- Takhle to musi byt jinak se vsechno rozpadne :)) -->
             <div class="form-group">
                 <div class="col-xs-offset-0 col-sm-offset-1 col-sm-8 col-md-9 col-lg-8">
 
                     <input type="hidden" name="user_id" value={{ user.id_user }}>
+                    <input type="hidden" name="post_id" value={{ post.id_posts }}>
 
-                    {% if post is defined %}
-                        <input type="hidden" name="post_id" value={{ post.id_posts }}>
+                    {% if review is defined %}
+                        <input type="hidden" name="review-exists" value="1">
                     {% endif %}
 
                 </div>
@@ -44,7 +45,13 @@
                 <label class="control-label col-sm-2" for="orig">Originality:</label>
                 <div class="col-sm-7">
                     <div class="upload-btn-wrapper">
-                        <input class="spinner" type="number" name="orig" id="orig" min="1" max="5">
+                        <input class="spinner" type="number" name="orig" id="orig" min="1" max="5"
+
+                                {% if review is defined %}
+                                    value="{{ review.orig }}"
+                                {% endif %}
+
+                               required >
                     </div>
                 </div>
             </div>
@@ -53,7 +60,13 @@
                 <label class="control-label col-sm-2" for="acc">Accuracy:</label>
                 <div class="col-sm-7">
                     <div class="upload-btn-wrapper">
-                        <input class="spinner" type="number" name="acc" id="acc" min="1" max="5">
+                        <input class="spinner" type="number" name="acc" id="acc" min="1" max="5"
+
+                                {% if review is defined %}
+                                    value="{{ review.acc }}"
+                                {% endif %}
+
+                               required >
                     </div>
                 </div>
             </div>
@@ -62,7 +75,13 @@
                 <label class="control-label col-sm-2" for="lang">Language:</label>
                 <div class="col-sm-7">
                     <div class="upload-btn-wrapper">
-                        <input class="spinner" type="number" name="lang" id="lang" min="1" max="5">
+                        <input class="spinner" type="number" name="lang" id="lang" min="1" max="5"
+
+                                {% if review is defined %}
+                                    value="{{ review.lang }}"
+                                {% endif %}
+
+                               required >
                     </div>
                 </div>
             </div>
@@ -72,8 +91,8 @@
             <div class="row">
                 <div class="col-sm-offset-2 col-sm-7 col-md-8 col-lg-7">
                     <textarea name="content" id="editor">
-                        {% if post is defined %}
-                            {{ post.text | escape }}
+                        {% if review is defined %}
+                            {{ review.text | escape }} <!-- | escape WHY IS THIS HERE AND WHY IS IT IN ARTICLES -->
                         {% endif %}
                     </textarea>
 
@@ -85,25 +104,39 @@
             <div class="form-group">
 
                 <div class="col-xs-6 col-sm-offset-3 col-sm-3 col-md-offset-6 col-md-2 col-lg-offset-5 col-lg-2 ">
-                    {% if post is defined and post.status == 2 %}
-                        <input type="submit" name="save-draft" class="btn mybutton" value="Save draft" disabled>
-                    {% else %}
-                        <input type="submit" name="save-draft" class="btn mybutton" value="Save draft">
-                    {% endif %}
+                    <input type="submit" name="save-draft" class="btn mybutton" value="Save draft"
+                            {% if review is defined and review.status == 2 %}
+                                disabled
+                            {% endif %} >
                 </div>
 
                 <div class="col-xs-6 col col-sm-3 col-md-2 col-lg-2">
-                    <input type="submit" name="submit" class="btn mybutton" value="Submit">
+                    <input type="submit" name="submit" class="btn mybutton" value="Submit"
+                            {% if review is defined and review.status == 3 %}
+                                disabled
+                            {% endif %}
+                    >
                 </div>
 
+
+                {% if review is defined and review.status == 3 %}
+                    <input type="hidden" name="status" value={{ review.status }}>
+                {% endif %}
+
             </div>
+
+            {% if review is defined %}
+                {{ review.text | raw }} <!-- | escape WHY IS THIS HERE AND WHY IS IT IN ARTICLES -->
+            {% endif %}
 
         </form>
     </div>
 
     <script>
         ClassicEditor
-            .create( document.querySelector( '#editor' ) )
+            .create( document.querySelector( '#editor' ), {
+                toolbar: [ 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'undo', 'redo' ]
+            } )
             .then( editor => {
                 console.log( editor );
             } )

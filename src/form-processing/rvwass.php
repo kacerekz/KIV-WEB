@@ -5,6 +5,16 @@ $db = new Database();
 
 if (isset($_POST['post_id']) && isset($_POST['rev-select'])) {
 
+    $db->DBUpdateExpanded("rating",
+        array(
+            "status"=>"1"       // Vraceno k prepracovani (coz vypada jako kdyby recenze jeste nebyla odeslana -> recenzent na ni muze znovu pracovat)
+        ),
+        array(
+            array("column" => "posts_id_posts",   "symbol"=>"=",    "value" => $_POST['post_id']),
+            array("column" => "users_id_user",   "symbol"=>"=",    "value" => $_POST['rev-select'])
+        )
+    );
+
     $post = $db->DBSelectOne("posts", "*", array(
         array("column" => "id_posts", "symbol" => "=", "value" => $_POST['post_id'])
     ));
@@ -40,6 +50,16 @@ if (isset($_POST['post_id']) && isset($_POST['rev-select'])) {
 
 if (isset($_POST['delete-rev'])){
 
+    $db->DBUpdateExpanded("rating",
+        array(
+            "status"=>"3"       // Zamitnuto (Declined)
+        ),
+        array(
+            array("column" => "posts_id_posts",   "symbol"=>"=",    "value" => $_POST['post_id']),
+            array("column" => "users_id_user",   "symbol"=>"=",    "value" => $_POST['user_id'])
+        )
+    );
+
     $post = $db->DBSelectOne("posts", "*", array(
         array("column"=>"id_posts", "symbol"=>"=", "value"=>$_POST['post_id'])
     ));
@@ -69,9 +89,21 @@ if (isset($_POST['delete-rev'])){
             $del_index = $i;
         }
     }
+}
 
+if (isset($_POST['accept'])){
+    $db->DBUpdateExpanded(
+        "posts",
+        array("status" => "4"),
+        array(array("column"=>"id_posts", "symbol"=>"=", "value"=>$_POST['post_id']))
+    );
 
-
+} else if (isset($_POST['decline'])){
+    $db->DBUpdateExpanded(
+        "posts",
+        array("status" => "3"),
+        array(array("column"=>"id_posts", "symbol"=>"=", "value"=>$_POST['post_id']))
+    );
 }
 
 header("Location: ../../index.php?page=rvwass");

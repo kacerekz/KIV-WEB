@@ -2,12 +2,12 @@
     width: 10%;
 }
 
-.glyphicon-edit {
+.glyphicon-edit, .glyphicon-pencil {
     font-size: 20px;
     margin-top: 1px;
 }
 
-.glyphicon-edit:hover {
+.glyphicon-edit:hover, .glyphicon-pencil:hover {
     color: gray;
 }
 
@@ -25,4 +25,10 @@
 .submit:focus {
     background-color: #ffffff;
     color: #353535;
+}
+
+.edit-btn {
+    background: transparent;
+    border: none !important;
+    font-size:0;
 }

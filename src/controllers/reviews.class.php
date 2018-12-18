@@ -16,6 +16,7 @@ class Reviews extends Controller
         include_once ("src/models/database.class.php");
         $db = new Database();
 
+        // NAJDE POUZE PRO AKTIVNI RECENZE
         $articles = array();
 
         for ($i = 1; $i<=3; $i++){
@@ -35,9 +36,39 @@ class Reviews extends Controller
                 array("column"=>"id_user",  "symbol"=>"=",  "value"=>$article['users_id_user'] )
             ));
 
+            $article['review'] = $db->DBSelectOne("rating", "*", array(
+                array("column"=>"posts_id_posts",  "symbol"=>"=",  "value"=>$article['id_posts'] ),
+                array("column"=>"users_id_user",  "symbol"=>"=",  "value"=>$data['user']['id_user'] )
+            ));
+
+            if (!$article['review']){
+                unset($article['review']);
+            }
+
             $data['articles'][] = $article;
         }
 
+
+        // PRIDANI ODMITNUTYCH RECENZI
+        $declined = $db->DBSelectAll("rating", "*", array(
+            array("column"=>"status",  "symbol"=>"=",  "value"=>"3" )
+        ));
+
+        foreach ($declined as $review){
+
+            $article = $db->DBSelectOne("posts", "*", array(
+                array("column"=>"id_posts",  "symbol"=>"=",  "value"=>$review['posts_id_posts']),
+            ));
+
+            // Zjisteni udaju o autorovi
+            $article['author'] = $db->DBSelectOne("users", "name, login", array(
+                array("column"=>"id_user",  "symbol"=>"=",  "value"=>$article['users_id_user'] )
+            ));
+
+            $article['review'] = $review;
+
+            $data['articles'][] = $article;
+        }
 
         parent::viewPage($data);
     }

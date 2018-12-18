@@ -6,6 +6,8 @@
 .spinner {
     border-radius: 5px;
     border: 1px solid lightgray;
+    padding-left: 8px;
+    padding-top: 3px;
 }
 
 .reviews-btn {

@@ -22,7 +22,7 @@ class Rvwass extends Controller
 
         // Vyber vsech autory dokoncenych clanku
         $articles = $db->DBSelectAll("posts", "*", array(
-            array("column"=>"status",  "symbol"=>">=",  "value"=>"2" )
+            array("column"=>"status",  "symbol"=>"=",  "value"=>"2" )
         ));
 
         // Vyber vsech recenzentu
@@ -59,9 +59,11 @@ class Rvwass extends Controller
                             array("column"=>"posts_id_posts",  "symbol"=>"=",  "value"=>$article['id_posts'] )
                         ));
 
-                        if (isset($review)){
-                            $article['review'.$i]['review'] = $review;
+                        $article['reviewer'.$i]['review'] = $review;
+                        if (!$review){
+                            unset($article['reviewer'.$i]['review']);
                         }
+
                     }
                 }
             }
@@ -93,11 +95,11 @@ class Rvwass extends Controller
         };
 */
 
-/*
-        echo "<pre style='margin-top: 60px'>";
-        var_dump($data['articles']);
-        echo "</pre>";
-*/
+        /*
+                echo "<pre style='margin-top: 60px'>";
+                var_dump($data['articles']);
+                echo "</pre>";
+        */
 
         parent::viewPage($data);
     }
