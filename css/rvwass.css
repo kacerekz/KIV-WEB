@@ -42,3 +42,17 @@
 .my-table-btn {
     width: 70px;
 }
+
+.icon-btn {
+    background: transparent;
+    border: none !important;
+    font-size:0;
+}
+
+.glyphicon-share {
+    font-size: 20px;
+}
+
+.glyphicon-share:hover {
+    color: gray;
+}

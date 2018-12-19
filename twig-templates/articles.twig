@@ -1,19 +1,45 @@
 {% extends "base.twig" %}
 {% block content %}
 
-    {% macro print(post)%}
+    {% macro print(post) %}
         <tr>
             <td>{{ post.title }}</td>
 
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>
+                {% if post.review1 is defined %}
+                    <form action="index.php?page=viewreview" target="_blank" method="post">
+                        <input type="hidden" name="user_id" value="{{ post.review1.users_id_user }}">
+                        <input type="hidden" name="post_id" value="{{ post.review1.posts_id_posts }}">
+                        <button type="submit" class="icon-btn"><span class="glyphicon glyphicon-share"></span></button>
+                    </form>
+                {% endif %}
+            </td>
+
+            <td>
+                {% if post.review2 is defined %}
+                    <form action="index.php?page=viewreview" target="_blank" method="post">
+                        <input type="hidden" name="user_id" value="{{ post.review2.users_id_user }}">
+                        <input type="hidden" name="post_id" value="{{ post.review2.posts_id_posts }}">
+                        <button type="submit" class="icon-btn"><span class="glyphicon glyphicon-share"></span></button>
+                    </form>
+                {% endif %}
+            </td>
+
+            <td>
+                {% if post.review3 is defined %}
+                    <form action="index.php?page=viewreview" target="_blank" method="post">
+                        <input type="hidden" name="user_id" value="{{ post.review3.users_id_user }}">
+                        <input type="hidden" name="post_id" value="{{ post.review3.posts_id_posts }}">
+                        <button type="submit" class="icon-btn"><span class="glyphicon glyphicon-share"></span></button>
+                    </form>
+                {% endif %}
+            </td>
 
             <td>
                 <form action="index.php?page=newarticle" method="post">
                     <input type="hidden" name="post_id" value={{ post.id_posts }}>
                     <input type="hidden" name="mode" value="edit">
-                    <button type="submit" class="edit-btn"><span class="glyphicon glyphicon-edit"></span></button>
+                    <button type="submit" class="icon-btn"><span class="glyphicon glyphicon-edit"></span></button>
                 </form>
             </td>
 
@@ -59,9 +85,7 @@
                 <thead>
                 <tr>
                     <th>Article</th>
-                    <th class="link-col">Reviews</th>
-                    <th class="link-col"></th>
-                    <th class="link-col"></th>
+                    <th class="rev-col" colspan="3">Reviews</th>
                     <th class="link-col">Edit</th>
                     <th id="status-col">Status</th>
                     <th id="delete-col">Delete</th>

@@ -1,0 +1,65 @@
+{% extends "base.twig" %}
+{% block content %}
+
+    <div class="container">
+
+        <div class="col-sm-offset-2 col-sm-7 col-md-8 col-lg-7">
+
+                <h3><b>Review</b></h3>
+                <hr>
+                For: <b>{{ post_title }}</b><br>
+                By: <b>{{ reviewer }}</b>
+
+                <table>
+                    <tr>
+                        <td class="col1"><b>Accuracy:</b></td>
+                        <td class="col2">
+                            {% for i in 0..review.acc-1 %}
+                                <span class="glyphicon glyphicon-star"></span>
+                            {% endfor %}
+
+                            {% if review.acc < 5 %}
+                                {% for i in 0..(5-review.acc-1) %}
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                {% endfor %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col1"><b>Originality:</b></td>
+                        <td class="col2">
+                            {% for i in 0..review.orig-1 %}
+                                <span class="glyphicon glyphicon-star"></span>
+                            {% endfor %}
+
+                            {% if review.orig < 5 %}
+                                {% for i in 0..(5-review.orig-1) %}
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                {% endfor %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col1"><b>Language:</b></td>
+                        <td class="col2">
+                            {% for i in 0..review.lang-1 %}
+                                <span class="glyphicon glyphicon-star"></span>
+                            {% endfor %}
+
+                            {% if review.lang < 5 %}
+                                {% for i in 0..(5-review.lang-1) %}
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                {% endfor %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="well text">
+                    {{ review.text | raw }}
+                </div>
+
+        </div>
+    </div>
+
+{% endblock content %}

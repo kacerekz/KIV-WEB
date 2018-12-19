@@ -2,6 +2,10 @@
     width: 4%;
 }
 
+.rev-col {
+    width: 12%;
+}
+
 #status-col{
     width: 10%;
 }
@@ -10,11 +14,11 @@
     width: 7%;
 }
 
-.glyphicon-edit {
+.glyphicon-edit, .glyphicon-share {
     font-size: 20px;
 }
 
-.glyphicon-edit:hover {
+.glyphicon-edit:hover, .glyphicon-share:hover {
     color: gray;
 }
 
@@ -42,7 +46,7 @@
     color: #353535;
 }
 
-.edit-btn {
+.icon-btn {
     background: transparent;
     border: none !important;
     font-size:0;

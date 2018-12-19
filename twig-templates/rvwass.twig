@@ -56,25 +56,31 @@
     <!-- Makro na vypis jedne recenze -->
     {% macro printRev(post, reviewer)%}
         <!-- Pokud to cele neni obalene ve form, vklada se padding ktereho se neda zbavit -->
-        <form action="../src/form-processing/rvwass.php" method="post">
-            <td>{{ reviewer.login }}</td>
-            {% if reviewer.review is defined and reviewer.review.status == 2 %}
-                <td>{{ reviewer.review.acc }}</td>
-                <td>{{ reviewer.review.orig }}</td>
-                <td>{{ reviewer.review.lang }}</td>
-                <td></td>
-                <td>{{ reviewer.review.acc +reviewer.review.orig + reviewer.review.lang }}</td>
-
-            {% else %}
-                <td colspan="5"></td>
-            {% endif %}
-
+        <td>{{ reviewer.login }}</td>
+        {% if reviewer.review is defined and reviewer.review.status == 2 %}
+            <td>{{ reviewer.review.acc }}</td>
+            <td>{{ reviewer.review.orig }}</td>
+            <td>{{ reviewer.review.lang }}</td>
             <td>
+                <form action="../index.php?page=viewreview" target="_blank" method="post">
+                    <input type="hidden" name="user_id" value="{{ reviewer.review.users_id_user }}">
+                    <input type="hidden" name="post_id" value="{{ reviewer.review.posts_id_posts }}">
+                    <button type="submit" class="icon-btn"><span class="glyphicon glyphicon-share"></span></button>
+                </form>
+            </td>
+            <td>{{ reviewer.review.acc + reviewer.review.orig + reviewer.review.lang }}</td>
+
+        {% else %}
+            <td colspan="5"></td>
+        {% endif %}
+
+        <td>
+            <form action="../src/form-processing/rvwass.php" method="post">
                 <input type="hidden" name="post_id" value="{{ post.id_posts }}">
                 <input type="hidden" name="user_id" value="{{ reviewer.id_user }}">
                 <input type="submit" name="delete-rev" class="btn my-table-btn" value="Delete">
-            </td>
-        </form>
+            </form>
+        </td>
     {% endmacro %}
 
     <!-- Makro na vypis nabidky recenzentu  -->

@@ -9,8 +9,8 @@ $twig = new Twig_Environment($loader);
 $auth = "0";
 $pages = array("login", "home", "about", "contacts", "settings",
     "rvwass", "usrmng",
-    "articles", "newarticle",
-    "reviews", "newreview");
+    "articles", "newarticle", "viewarticle",
+    "reviews", "newreview", "viewreview");
 
 // Je/ma byt uzivatel prihlasen? ***************************
 include_once ("src/controllers/login-manager.class.php");
@@ -54,6 +54,15 @@ $data['page'] = $page;
 $data['title'] = "WebCON 2018";
 $data['index'] = array_search($page, $pages);
 $filename = "src/controllers/".$page.".class.php";
+
+/*
+echo "<pre style='margin-top: 60px'>";
+var_dump($_POST);
+echo "</pre>";
+
+exit;
+*/
+
 
 // Ziskej sablonu ******************************************
 if ( file_exists($filename) && !is_dir($filename) ) {

@@ -11,9 +11,9 @@
                     <input type="hidden" name="post_id" value={{ post.id_posts }}>
                     <input type="hidden" name="user_id" value={{ user.id_user }}>
                     {% if post.review is not defined %}
-                        <button type="submit" class="edit-btn"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button type="submit" class="icon-btn"><span class="glyphicon glyphicon-pencil"></span></button>
                     {% else %}
-                        <button type="submit" class="edit-btn"><span class="glyphicon glyphicon-edit"></span></button>
+                        <button type="submit" class="icon-btn"><span class="glyphicon glyphicon-edit"></span></button>
                     {% endif %}
                 </form>
             </td>
