@@ -16,7 +16,7 @@ if (isset($_POST['status'])){
 if (isset($_POST['quick-submit'])) {
     $db->DBUpdateExpanded( "rating",
         array(
-            "datetime"      => date("Y-m-d h:i:s"),
+            "datetime"      => date("Y-m-d H:i:s"),
             "status"        => $status
         ),
 
@@ -33,7 +33,7 @@ if (isset($_POST['quick-submit'])) {
             "acc"           => $_POST['acc'],
             "lang"          => $_POST['lang'],
             "text"          => $_POST['content'],
-            "datetime"      => date("Y-m-d h:i:s"),
+            "datetime"      => date("Y-m-d H:i:s"),
             "status"        => $status
         ),
 
@@ -49,7 +49,7 @@ if (isset($_POST['quick-submit'])) {
         array("column" => "acc",          "value" => $_POST['acc']),
         array("column" => "lang",          "value" => $_POST['lang']),
         array("column" => "text",           "value" => $_POST['content']),
-        array("column" => "datetime",       "value" => date("Y-m-d h:i:s")),
+        array("column" => "datetime",       "value" => date("Y-m-d H:i:s")),
         array("column" => "status",         "value" => $status),
         array("column" => "users_id_user",  "value" => $_POST['user_id']),
         array("column" => "posts_id_posts",  "value" => $_POST['post_id'])

@@ -1,9 +1,4 @@
 {% extends "base.twig" %}
 {% block content %}
-
-<h3>{{ article.title }}</h3>
-<p>Author: {{ article.author }}</p>
-<hr>
-{{ article.text }}
-
+{% include 'print-article.twig' with {'article':'article'} %}
 {% endblock content %}

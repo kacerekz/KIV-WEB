@@ -24,6 +24,13 @@ class NewArticle extends Controller
                     array("column" => "id_posts",   "symbol"=>"=",    "value" => $_POST['post_id'])
                 )
             );
+
+            if ($data["post"]['status'] >= 3 ){
+                header("Location: index.php?page=viewarticle&id=".$_POST['post_id']);
+                exit;
+            }
+
+
         };
 
         $data["scripts"] = array("https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js");

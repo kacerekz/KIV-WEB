@@ -53,12 +53,7 @@ hr {
     background-color: #353535;
 }
 
-.btn:hover {
-    color: #ffffff;
-    background-color: #353535;
-}
-
-.btn:focus {
+.btn:hover, .btn:focus {
     color: #ffffff;
     background-color: #353535;
 }
@@ -112,3 +107,39 @@ hr {
     border-top: none;
 }
 
+a {
+    color: #212121;
+}
+
+a:hover {
+    color: #353535;
+}
+
+.big-chevron {
+    font-size: 48pt;
+    background-color: transparent;
+    color: #212121;
+    position: relative;
+    top: 50%;
+}
+
+.big-chevron:hover {
+    color: #353535;
+}
+
+.left-chevron {
+    float: left;
+}
+
+.right-chevron {
+    float: right;
+}
+
+.table {
+    margin-bottom: 120px;
+}
+
+.footer-text {
+    margin-left: 5px;
+    margin-top: 25px;
+}

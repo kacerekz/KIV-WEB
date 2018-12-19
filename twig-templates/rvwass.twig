@@ -4,8 +4,9 @@
     <!-- Makro na vypis jedne radky tabulky -->
     {% macro print(post, reviewers)%}
         <tr>
-            <td rowspan="3">{{ post.title }}</td>
-            <td rowspan="3">{{ post.author.name }}</td>
+            <td rowspan="3"><a href="../index.php?page=viewarticle&id={{ post.id_posts }}" target="_blank">
+                    {{ post.title }}</a></td>
+            <td rowspan="3">{{ post.author.name | raw }}</td>
 
             {% import _self as printer %}
             {% if post.reviewer1 is defined %}
@@ -56,7 +57,7 @@
     <!-- Makro na vypis jedne recenze -->
     {% macro printRev(post, reviewer)%}
         <!-- Pokud to cele neni obalene ve form, vklada se padding ktereho se neda zbavit -->
-        <td>{{ reviewer.login }}</td>
+        <td>{{ reviewer.login | raw }}</td>
         {% if reviewer.review is defined and reviewer.review.status == 2 %}
             <td>{{ reviewer.review.acc }}</td>
             <td>{{ reviewer.review.orig }}</td>
@@ -99,7 +100,7 @@
                 </select>
             </td>
 
-            <td></td><td></td><td></td><td></td><td></td>
+            <td colspan="5"></td>
 
             <td><input type="submit" class="btn my-table-btn" value="Assign" {% if num != (post.review_count+1) %} disabled {% endif %}></td>
         </form>
@@ -108,7 +109,7 @@
 
     {% macro printRevSel(post, reviewer)%}
         {% if post.reviewer_id1 != reviewer.id_user and  post.reviewer_id2 != reviewer.id_user and post.reviewer_id3 != reviewer.id_user %}
-            <option value="{{ reviewer.id_user }}">{{ reviewer.login }}</option>
+            <option value="{{ reviewer.id_user }}">{{ reviewer.login | raw }}</option>
         {% endif %}
     {% endmacro %}
 

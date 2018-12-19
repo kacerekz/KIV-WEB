@@ -51,7 +51,8 @@ class Reviews extends Controller
 
         // PRIDANI ODMITNUTYCH RECENZI
         $declined = $db->DBSelectAll("rating", "*", array(
-            array("column"=>"status",  "symbol"=>"=",  "value"=>"3" )
+            array("column"=>"status",  "symbol"=>"=",  "value"=>"3" ),
+            array("column"=>"users_id_user",  "symbol"=>"=",  "value"=>$data['user']['id_user'])
         ));
 
         foreach ($declined as $review){

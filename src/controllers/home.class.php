@@ -14,9 +14,20 @@ class Home extends Controller
 
     public function viewPage($data){
 
-        echo "<pre style='margin-top: 60px'>";
-        var_dump($_POST/*$_SESSION*/);
-        echo "</pre>";
+        include_once ("src/models/database.class.php");
+        $db = new Database();
+        $articles = $db->DBSelectAll("posts", "*", array(
+            array("column"=>"status", "symbol"=>"=", "value"=>"4")
+        ));
+
+        foreach ($articles as $article){
+            // Zjisteni udaju o autorovi
+            $article['author'] = $db->DBSelectOne("users", "name", array(
+                array("column"=>"id_user",  "symbol"=>"=",  "value"=>$article['users_id_user'] )
+            ));
+
+            $data['articles'][] = $article;
+        }
 
         parent::viewPage($data);
     }

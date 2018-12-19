@@ -98,22 +98,29 @@ if (isset($_POST['accept'])){
         array(array("column"=>"id_posts", "symbol"=>"=", "value"=>$_POST['post_id']))
     );
 
+    for ($i = 1; $i <= 3; $i++){
+        $db->DBUpdateExpanded(
+            "reviews",
+            array("status" => "5"),
+            array(array("column"=>"id_posts", "symbol"=>"=", "value"=>$_POST['post_id']))
+        );
+    }
+
 } else if (isset($_POST['decline'])){
     $db->DBUpdateExpanded(
         "posts",
         array("status" => "3"),
         array(array("column"=>"id_posts", "symbol"=>"=", "value"=>$_POST['post_id']))
     );
+
+    for ($i = 1; $i <= 3; $i++){
+        $db->DBUpdateExpanded(
+            "reviews",
+            array("status" => "4"),
+            array(array("column"=>"id_posts", "symbol"=>"=", "value"=>$_POST['post_id']))
+        );
+    }
 }
 
 header("Location: ../../index.php?page=rvwass");
 exit;
-
-/*
- echo "<pre style='margin-top: 60px'>";
-var_dump($post);
-echo "</pre>";
-}
-}
-/*
-*/

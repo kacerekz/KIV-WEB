@@ -1,8 +1,6 @@
 {% extends "base.twig" %}
 {% block content %}
-
-    <div class="container">
-
-    </div>
-
+    {% for post in articles %}
+        {% include 'print-article.twig' %}
+    {% endfor %}
 {% endblock content %}

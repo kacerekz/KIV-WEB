@@ -41,12 +41,7 @@ class Articles extends Controller
 
             $data['articles'][] = $article;
         }
-/*
-        echo "<pre style='margin-top: 60px'>";
-        var_dump($data['articles']);
-        echo "</pre>";
-        exit;
-*/
+
         parent::viewPage($data);
     }
 }

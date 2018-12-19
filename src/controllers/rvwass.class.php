@@ -72,35 +72,6 @@ class Rvwass extends Controller
             $data['articles'][] = $article;
         }
 
-        /*
-        foreach ($articles as $article){
-
-            WHAT THE EVER LIVING FUCK IS THIS FOR
-
-
-            $article['reviewers'] = array();
-
-            foreach ($reviewers as $reviewer){
-                $old_review = $db->DBSelectOne("rating", "*", array(
-                    array("column"=>"users_id_user", "symbol"=>"=", "value"=>$reviewer['id_user']),
-                    array("column"=>"posts_id_posts", "symbol"=>"=", "value"=>$article['id_posts'])
-                ));
-
-                if (!$old_review){
-                    $article['reviewers'][] = $reviewer;
-                }
-            }
-
-            $data['articles'][] = $article;
-        };
-*/
-
-        /*
-                echo "<pre style='margin-top: 60px'>";
-                var_dump($data['articles']);
-                echo "</pre>";
-        */
-
         parent::viewPage($data);
     }
 }

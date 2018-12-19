@@ -1,63 +1,72 @@
 {% extends "base.twig" %}
 {% block content %}
 
+    {% macro stars(num)%}
+        {% for i in 0..num-1 %}
+            <span class="glyphicon glyphicon-star"></span>
+        {% endfor %}
+
+        {% if num < 5 %}
+            {% for i in 0..(5-num-1) %}
+                <span class="glyphicon glyphicon-star-empty"></span>
+            {% endfor %}
+        {% endif %}
+    {% endmacro %}
+
+
     <div class="container">
 
         <div class="col-sm-offset-2 col-sm-7 col-md-8 col-lg-7">
 
-                <h3><b>Review</b></h3>
-                <hr>
-                For: <b>{{ post_title }}</b><br>
-                By: <b>{{ reviewer }}</b>
+            <h3><b>Review</b></h3>
+            <hr>
 
-                <table>
-                    <tr>
-                        <td class="col1"><b>Accuracy:</b></td>
-                        <td class="col2">
-                            {% for i in 0..review.acc-1 %}
-                                <span class="glyphicon glyphicon-star"></span>
-                            {% endfor %}
+            <table>
+                <tr>
+                    <td>For:</td>
+                    <td class="col2">
+                        <a href="../index.php?page=viewarticle&id={{ post.id_posts }}" target="_blank">
+                            <b>{{ post.title }}</b></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>By:</td>
+                    <td class="col2">
+                        <b>{{ reviewer | raw }}</b>
+                    </td>
+                </tr>
+            </table>
 
-                            {% if review.acc < 5 %}
-                                {% for i in 0..(5-review.acc-1) %}
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                {% endfor %}
-                            {% endif %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col1"><b>Originality:</b></td>
-                        <td class="col2">
-                            {% for i in 0..review.orig-1 %}
-                                <span class="glyphicon glyphicon-star"></span>
-                            {% endfor %}
+            <table>
+                <tr>
+                    <td class="col1"><b>Accuracy:</b></td>
+                    <td class="col2">
+                        {% import _self as printer %}
+                        {{ printer.stars(review.acc) }}
 
-                            {% if review.orig < 5 %}
-                                {% for i in 0..(5-review.orig-1) %}
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                {% endfor %}
-                            {% endif %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col1"><b>Language:</b></td>
-                        <td class="col2">
-                            {% for i in 0..review.lang-1 %}
-                                <span class="glyphicon glyphicon-star"></span>
-                            {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col1"><b>Originality:</b></td>
+                    <td class="col2">
+                        {% import _self as printer %}
+                        {{ printer.stars(review.orig) }}
 
-                            {% if review.lang < 5 %}
-                                {% for i in 0..(5-review.lang-1) %}
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                {% endfor %}
-                            {% endif %}
-                        </td>
-                    </tr>
-                </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col1"><b>Language:</b></td>
+                    <td class="col2">
+                        {% import _self as printer %}
+                        {{ printer.stars(review.lang) }}
 
-                <div class="well text">
-                    {{ review.text | raw }}
-                </div>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="well text">
+                {{ review.text | raw }}
+            </div>
 
         </div>
     </div>

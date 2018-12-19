@@ -3,8 +3,9 @@
 
     {% macro print(post, user) %}
         <tr>
-            <td>{{ post.title }}</td>
-            <td>{{ post.author.login }}</td>
+            <td><a href="../index.php?page=viewarticle&id={{ post.id_posts }}" target="_blank">
+                    {{ post.title }}</a></td>
+            <td>{{ post.author.login | raw }}</td>
 
             <td>
                 <form action="index.php?page=newreview" method="post">
@@ -12,7 +13,10 @@
                     <input type="hidden" name="user_id" value={{ user.id_user }}>
                     {% if post.review is not defined %}
                         <button type="submit" class="icon-btn"><span class="glyphicon glyphicon-pencil"></span></button>
-                    {% else %}
+                    {% elseif post.review.status > 2 %}
+                        <button formaction="index.php?page=viewreview" formtarget="_blank"
+                                type="submit" class="icon-btn"><span class="glyphicon glyphicon-share"></span></button>
+                    {% elseif post.status == 2 %}
                         <button type="submit" class="icon-btn"><span class="glyphicon glyphicon-edit"></span></button>
                     {% endif %}
                 </form>
@@ -20,14 +24,14 @@
 
             <td>
                 {% if post.review is defined and post.review.status == 2 %}
-                    {% if post.review.datetime < post.datetime %}
+                    {% if date(post.review.datetime) < date(post.datetime) %}
                         Article changed.
                     {% else %}
                         Up to date.
                     {% endif %}
 
                 {% elseif post.review.status == 1 %}
-                    {% if post.review.datetime < post.datetime %}
+                    {% if date(post.review.datetime) < date(post.datetime) %}
                         Article changed.
                     {% else %}
                         <form class="form-horizontal" action="../src/form-processing/newreview.php" method="post">
@@ -63,7 +67,7 @@
                 <thead>
                 <tr>
                     <th>Article</th>
-                    <th>Author</th>
+                    <th id="author-col">Author</th>
                     <th id="link-col">Review</th>
                     <th id="status-col">Status</th>
                 </tr>

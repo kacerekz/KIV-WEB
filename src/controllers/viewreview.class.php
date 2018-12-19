@@ -19,7 +19,7 @@ class ViewReview extends Controller
             include_once ("src/models/database.class.php");
             $db = new Database();
 
-            $post = $db->DBSelectOne("posts", "title, users_id_user", array(
+            $post = $db->DBSelectOne("posts", "id_posts, title, users_id_user", array(
                 array("column"=>"id_posts", "symbol"=>"=", "value"=>$_POST['post_id'])
             ));
 
@@ -42,7 +42,7 @@ class ViewReview extends Controller
                     array("column" => "id_user",   "symbol"=>"=",    "value" => $_POST['user_id']))
             );
 
-            $data['post_title'] = $post['title'];
+            $data['post'] = $post;
             $data["reviewer"] = $reviewer['login'];
 
             parent::viewPage($data);

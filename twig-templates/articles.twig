@@ -3,7 +3,8 @@
 
     {% macro print(post) %}
         <tr>
-            <td>{{ post.title }}</td>
+            <td><a href="../index.php?page=viewarticle&id={{ post.id_posts }}" target="_blank">
+                    {{ post.title }}</a></td>
 
             <td>
                 {% if post.review1 is defined %}
@@ -35,6 +36,7 @@
                 {% endif %}
             </td>
 
+            {% if post.status <= 2 %}
             <td>
                 <form action="index.php?page=newarticle" method="post">
                     <input type="hidden" name="post_id" value={{ post.id_posts }}>
@@ -42,6 +44,9 @@
                     <button type="submit" class="icon-btn"><span class="glyphicon glyphicon-edit"></span></button>
                 </form>
             </td>
+            {% else %}
+                <td></td>
+            {% endif %}
 
             <td>
                 {% if post.status == 1 %}

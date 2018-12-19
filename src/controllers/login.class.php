@@ -84,10 +84,6 @@ class Login extends Controller
 
         $data["cssfile"] = array("css/login.css", "css/form.css");
 
-        echo "<pre style='margin-top: 60px'>";
-        var_dump($_POST);
-        echo "</pre>";
-
         parent::viewPage($data);
     }
 

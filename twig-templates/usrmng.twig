@@ -4,9 +4,9 @@
     <!-- Makro na vypis uzivatele -->
     {% macro print(user)%}
         <tr>
-            <td>{{ user.name }}</td>
-            <td>{{ user.login }}</td>
-            <td>{{ user.email }}</td>
+            <td>{{ user.name | raw }}</td>
+            <td>{{ user.login | raw }}</td>
+            <td>{{ user.email | raw }}</td>
 
             <td>
                 <form action="../src/form-processing/change-user.php" method="post">

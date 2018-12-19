@@ -13,6 +13,7 @@ class Contacts extends Controller
     public $auth = array("0", "1", "2", "3");
 
     public function viewPage($data){
+
         include_once ("src/models/database.class.php");
         $db = new Database();
         $contacts = $db->DBSelectAll("contacts", "*", array());

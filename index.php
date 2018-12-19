@@ -31,7 +31,7 @@ if ($login->isUserLoged()){
     $user = $db->DBSelectOne("users", "*", array(
         array("column"=>"id_user", "symbol" => "=", "value" => $data['user']['id_user'])));
 
-    if (!isset($user)){
+    if (!isset($user['id_user'])){
         $login->logout();
         unset($data['user']);
     }
@@ -54,14 +54,6 @@ $data['page'] = $page;
 $data['title'] = "WebCON 2018";
 $data['index'] = array_search($page, $pages);
 $filename = "src/controllers/".$page.".class.php";
-
-/*
-echo "<pre style='margin-top: 60px'>";
-var_dump($_POST);
-echo "</pre>";
-
-exit;
-*/
 
 
 // Ziskej sablonu ******************************************

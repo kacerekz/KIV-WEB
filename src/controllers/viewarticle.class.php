@@ -14,30 +14,43 @@ class ViewArticle extends Controller
 
     public function viewPage($data){
 
-        if (isset($_POST['post_id'])) {
+        if (isset($_GET['id'])) {
 
             include_once("src/models/database.class.php");
             $db = new Database();
 
-            $post = $db->DBSelectOne("posts", "*", array(
-                array("column"=>"id_posts", "symbol"=>"=", "value"=>$_POST['post_id'])
+            $article = $db->DBSelectOne("posts", "*", array(
+                array("column"=>"id_posts", "symbol"=>"=", "value"=>$_GET['id'])
             ));
 
-            if ($post['status'] != 4 && (
-                    $data['user']['rights_id_rights'] != "3" ||
-                    $data['user']['id_user'] != $post['users_id_user'] ||
-                    $data['user']['id_user'] != $post['reviewer_id1'] ||
-                    $data['user']['id_user'] != $post['reviewer_id2'] ||
-                    $data['user']['id_user'] != $post['reviewer_id3']
+            $article['author'] = $db->DBSelectOne("users", "name, login", array(
+                array("column"=>"id_user",  "symbol"=>"=",  "value"=>$article['users_id_user'] )
+            ));
+
+            $review = $db->DBSelectOne("rating", "*", array(
+                array("column"=>"posts_id_posts", "symbol"=>"=", "value"=>$_GET['id']),
+                array("column"=>"users_id_user", "symbol"=>"=", "value"=>$data['user']['id_user'])
+            ));
+
+
+            if (!$review && $article['status'] != 4 && (
+                    $data['user']['rights_id_rights'] != "3" &&
+                    $data['user']['id_user'] != $article['users_id_user'] &&
+                    $data['user']['id_user'] != $article['reviewer_id1'] &&
+                    $data['user']['id_user'] != $article['reviewer_id2'] &&
+                    $data['user']['id_user'] != $article['reviewer_id3']
                 )){
                 header("Location: index.php");
                 exit;
             }
 
-            $data['post'] = $post;
+            $data['post'] = $article;
 
             parent::viewPage($data);
+            exit;
         }
 
+        header("Location: index.php");
+        exit;
     }
 }

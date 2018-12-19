@@ -27,7 +27,7 @@ else {
             array(
                 "title"         => $_POST['title'],
                 "text"          => $_POST['content'],
-                "datetime"      => date("Y-m-d h:i:s"),
+                "datetime"      => date("Y-m-d H:i:s"),
                 "status"        => $status
             ),
 
@@ -40,7 +40,7 @@ else {
         $db->DBInsertExpanded("posts", array(
             array("column" => "title",          "value" => $_POST['title']),
             array("column" => "text",           "value" => $_POST['content']),
-            array("column" => "datetime",       "value" => date("Y-m-d h:i:s")),
+            array("column" => "datetime",       "value" => date("Y-m-d H:i:s")),
             array("column" => "status",         "value" => $status),
             array("column" => "users_id_user",  "value" => $_POST['user_id'])
         ));

@@ -1,13 +1,21 @@
-#link-col, #status-col, #sum-col {
-    width: 10%;
+#link-col {
+    width: 5%;
 }
 
-.glyphicon-edit, .glyphicon-pencil {
+#status-col {
+    width: 14%;
+}
+
+#author-col {
+    width: 14%;
+}
+
+.glyphicon-edit, .glyphicon-pencil, .glyphicon-share {
     font-size: 20px;
     margin-top: 1px;
 }
 
-.glyphicon-edit:hover, .glyphicon-pencil:hover {
+.glyphicon-edit:hover, .glyphicon-pencil:hover, .glyphicon-share:hover {
     color: gray;
 }
 

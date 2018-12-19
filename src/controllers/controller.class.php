@@ -16,6 +16,30 @@ class Controller
     }
 
     public function viewPage($data){
+
+        if (isset($_GET['i'])){
+            $data['index'] = $_GET['i'];
+
+        } else if (!isset($data['index'])){
+            $data['index'] = 0;
+        }
+
+        if(!isset($data['per_page'])){
+            $data['per_page'] = 10;
+        }
+
+        if(!isset($data['max_index'])){
+            $data['max_index'] = 0;
+        }
+
+        if ($data['index'] > $data['max_index']){
+            $data['index'] = $data['index']-$data['per_page'];
+        }
+
+        if ($data['index'] < 0){
+            $data['index'] = 0;
+        }
+
         $cssf = "css/".$data['page'].".css";
         if (!key_exists("cssfile", $data) && file_exists($cssf ) && is_file($cssf)){
             $data["cssfile"] = array("$cssf ");
