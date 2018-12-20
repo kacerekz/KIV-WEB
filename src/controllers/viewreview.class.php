@@ -8,6 +8,7 @@
 
 require_once "controller.class.php";
 
+// Ovladac stranky, ktera zobrazuje recenzi
 class ViewReview extends Controller
 {
     public $auth = array("1", "2", "3");

@@ -8,6 +8,7 @@
 
 require_once "controller.class.php";
 
+// Ovladac stranky pro pridani noveho/editaci clanku
 class NewArticle extends Controller
 {
     public $auth = array("1");

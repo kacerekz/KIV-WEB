@@ -8,6 +8,7 @@
 
 require_once "controller.class.php";
 
+// Övladec stranky s informacemi o konferenci
 class About extends Controller
 {
     public $auth = array("0", "1", "2", "3");

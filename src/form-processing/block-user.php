@@ -3,6 +3,7 @@
 include_once ("../models/database.class.php");
 $db = new Database();
 
+// Pokud uzivatel neni zablokovan, zablokuje ho a odebere mu recenze, je-li recenzentem
 if ($_POST['blocked'] == 0 ){
 
     $db->DBUpdateExpanded(
@@ -15,6 +16,7 @@ if ($_POST['blocked'] == 0 ){
         array("column"=>"id_user", "symbol"=>"=", "value"=>$_POST['user_id'])
     ));
 
+    // Odebrani recenzi - posun z vyssich pozic na nizsi pro spravnou funkcnost pridelovani recenzi
     if ($user['rights_id_rights'] == 2){
 
         $posts = array();
@@ -60,7 +62,7 @@ if ($_POST['blocked'] == 0 ){
     }
 
 
-
+// Byl li uzivatel zablokovan, odblokuje ho
 } else if ($_POST['blocked'] == 1 ){
 
     $db->DBUpdateExpanded(

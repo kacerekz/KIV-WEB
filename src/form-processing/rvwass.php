@@ -1,13 +1,19 @@
 <?php
 
+// Prideleni recenze
+
+
 include_once ("../models/database.class.php");
 $db = new Database();
 
+
+// Prideleni noveho recenzenta
 if (isset($_POST['post_id']) && isset($_POST['rev-select'])) {
 
     $db->DBUpdateExpanded("rating",
         array(
-            "status"=>"1"       // Vraceno k prepracovani (coz vypada jako kdyby recenze jeste nebyla odeslana -> recenzent na ni muze znovu pracovat)
+            // Pokud existoval - vraceno k prepracovani (coz vypada jako kdyby recenze jeste nebyla odeslana -> recenzent na ni muze znovu pracovat)
+            "status"=>"1"
         ),
         array(
             array("column" => "posts_id_posts",   "symbol"=>"=",    "value" => $_POST['post_id']),
@@ -47,6 +53,8 @@ if (isset($_POST['post_id']) && isset($_POST['rev-select'])) {
     }
 
 }
+
+// Odebrani recenzi - posun z vyssich pozic na nizsi pro spravnou funkcnost pridelovani recenzi
 
 if (isset($_POST['delete-rev'])){
 
@@ -91,6 +99,8 @@ if (isset($_POST['delete-rev'])){
     }
 }
 
+
+// Prijeti clanku
 if (isset($_POST['accept'])){
     $db->DBUpdateExpanded(
         "posts",
@@ -106,6 +116,7 @@ if (isset($_POST['accept'])){
         );
     }
 
+    // Odmitnuti clanku
 } else if (isset($_POST['decline'])){
     $db->DBUpdateExpanded(
         "posts",

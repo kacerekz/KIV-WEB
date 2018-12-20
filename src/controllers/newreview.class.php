@@ -14,6 +14,8 @@ class NewReview extends Controller
 
     public function viewPage($data){
 
+        // Pokud jiz nejaka recenze pro tento prispevek existuje
+        // Pak se najde a posle do sablony
         if (isset($_POST['user_id']) && isset($_POST['post_id'])){
             include_once ("src/models/database.class.php");
             $db = new Database();

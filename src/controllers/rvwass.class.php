@@ -8,6 +8,7 @@
 
 require_once "controller.class.php";
 
+// Ovladac stranky admina, ktera ho nechava prirazovat recenzenty
 class Rvwass extends Controller
 {
 

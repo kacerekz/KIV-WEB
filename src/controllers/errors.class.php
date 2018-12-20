@@ -8,6 +8,7 @@
 
 require_once "controller.class.php";
 
+// Ovladac pro vypis chyb
 class Errors extends Controller
 {
     public $auth = array("0", "1", "2", "3");

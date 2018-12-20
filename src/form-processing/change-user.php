@@ -1,8 +1,6 @@
 <?php
 
-echo "<pre style='margin-top: 60px'>";
-var_dump($_POST);
-echo "</pre>";
+// Zmena prav uzivatele
 
 if($_POST['rights-select'] >= 1 && $_POST['rights-select'] <= 3){
 

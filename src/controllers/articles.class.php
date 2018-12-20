@@ -8,6 +8,7 @@
 
 require_once "controller.class.php";
 
+// Ovladac stranky ktera autorovi zobrazuje jeho clanky
 class Articles extends Controller
 {
     public $auth = array("1");

@@ -1,5 +1,8 @@
 <?php
 
+// Smaze uzivatele a jeho prispevky, recenze & PDF prevede na GhostUsera
+
+
 if(isset($_POST['user_id'])){
 
     include ("../models/database.class.php");

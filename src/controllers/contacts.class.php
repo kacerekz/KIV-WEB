@@ -8,8 +8,10 @@
 
 require_once "controller.class.php";
 
+// Ovladac stranky s kontakty
 class Contacts extends Controller
 {
+    // Pristupova prava
     public $auth = array("0", "1", "2", "3");
 
     public function viewPage($data){

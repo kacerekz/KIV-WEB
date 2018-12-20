@@ -8,6 +8,7 @@
 
 require_once "controller.class.php";
 
+// Ovladac stranky recenzenta, ktera ukazuje vsechny jeho recenze
 class Reviews extends Controller
 {
     public $auth = array("2");

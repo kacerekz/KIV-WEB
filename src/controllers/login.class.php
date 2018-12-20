@@ -8,6 +8,7 @@
 
 require_once "controller.class.php";
 
+// Ovladac prihlaseni uzivatele
 class Login extends Controller
 {
     public $auth = array("0");

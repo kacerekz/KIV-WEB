@@ -3,6 +3,7 @@
 include ("../models/database.class.php");
 $db = new Database();
 
+// Pokud ma byt clanek smazan
 if (isset($_POST['delete'])){
 
     $db->DBDelete("rating", array(
@@ -17,6 +18,7 @@ if (isset($_POST['delete'])){
 
 else {
 
+    // Pridej soubor?
     if(isset($_FILES["file"])) {
         $dir = "../../user-files/";
         $file = $dir . $_POST['user_id'] ."_". $_POST['post_id'].".pdf";
@@ -27,12 +29,14 @@ else {
         }
     }
 
+    // Uloz nebo odesli?
     if (isset($_POST['save-draft'])){
         $status = 1;
     } else if (isset($_POST['submit'])){
         $status = 2;
     }
 
+    // Pokud jiz existoval, udelej update
     if (isset($_POST['post_id'])){
         $db->DBUpdateExpanded( "posts",
             array(
@@ -46,6 +50,7 @@ else {
             )
         );
 
+        // Jinak vloz novy
     } else {
         $db->DBInsertExpanded("posts", array(
             array("column" => "title",          "value" => $_POST['title']),

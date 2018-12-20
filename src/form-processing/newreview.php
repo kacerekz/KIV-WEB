@@ -13,6 +13,7 @@ if (isset($_POST['status'])){
     $status = 2;
 }
 
+// Odeslani z hlavni stranky
 if (isset($_POST['quick-submit'])) {
     $db->DBUpdateExpanded( "rating",
         array(
@@ -26,6 +27,7 @@ if (isset($_POST['quick-submit'])) {
         )
     );
 
+    // Update pokud jiz existoval
 } else if (isset($_POST['review-exists'])){
     $db->DBUpdateExpanded( "rating",
         array(
@@ -44,6 +46,8 @@ if (isset($_POST['quick-submit'])) {
     );
 
 } else {
+
+    // Jinak se jen vlozi
     $db->DBInsertExpanded("rating", array(
         array("column" => "orig",          "value" => $_POST['orig']),
         array("column" => "acc",          "value" => $_POST['acc']),

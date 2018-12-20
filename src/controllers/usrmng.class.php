@@ -8,6 +8,7 @@
 
 require_once "controller.class.php";
 
+// Ovladac stranky pro spravu uzivatel
 class UsrMng extends Controller
 {
     public $auth = array("3");

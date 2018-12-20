@@ -8,6 +8,7 @@
 
 require_once "controller.class.php";
 
+// Ovladac domovske stranky - vypis publikovanych clanku
 class Home extends Controller
 {
     public $auth = array("0", "1", "2", "3");

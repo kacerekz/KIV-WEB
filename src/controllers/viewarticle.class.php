@@ -8,6 +8,7 @@
 
 require_once "controller.class.php";
 
+// Ovladac stanky, ktera zobrazuje clanek
 class ViewArticle extends Controller
 {
     public $auth = array("0", "1", "2", "3");
