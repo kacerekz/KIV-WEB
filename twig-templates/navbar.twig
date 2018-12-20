@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.php?page=home">{{ title }}</a>
+        <a class="navbar-brand" href="../index.php?page=home">{{ title }}</a>
     </div>
 
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -14,13 +14,13 @@
 
             <!-- Polozky menu, mohou byt aktivni -->
             <li class="nav-item" {% if index == 1 %} class="active" {% endif %}>
-                <a class="nav-link" href="index.php?page=home">Home</a>
+                <a class="nav-link" href="../index.php?page=home">Home</a>
             </li>
             <li class="nav-item" {% if index == 2 %} class="active" {% endif %}>
-                <a class="nav-link" href="index.php?page=about">About</a>
+                <a class="nav-link" href="../index.php?page=about">About</a>
             </li>
             <li class="nav-item" {% if index == 3 %} class="active" {% endif %}>
-                <a class="nav-link" href="index.php?page=contacts">Contacts</a>
+                <a class="nav-link" href="../index.php?page=contacts">Contacts</a>
             </li>
 
         </ul>
@@ -32,19 +32,18 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"> {{ user.login | raw }}
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        {% if user.rights_id_rights == 1 %} <li><a href="index.php?page=articles">My articles</a></li> {% endif %}
-                        {% if user.rights_id_rights == 2 %} <li><a href="index.php?page=reviews">My reviews</a></li> {% endif %}
-                        {% if user.rights_id_rights == 3 %} <li><a href="index.php?page=rvwass">Review assignment</a></li> {% endif %}
-                        {% if user.rights_id_rights == 3 %} <li><a href="index.php?page=usrmng">User management</a></li> {% endif %}
-                        <li><a href="index.php?page=settings">Settings</a></li>
-                        <li><a href="index.php?logout=true">Log out</a></li>
+                        {% if user.rights_id_rights == 1 %} <li><a href="../index.php?page=articles">My articles</a></li> {% endif %}
+                        {% if user.rights_id_rights == 2 %} <li><a href="../index.php?page=reviews">My reviews</a></li> {% endif %}
+                        {% if user.rights_id_rights == 3 %} <li><a href="../index.php?page=rvwass">Review assignment</a></li> {% endif %}
+                        {% if user.rights_id_rights == 3 %} <li><a href="../index.php?page=usrmng">User management</a></li> {% endif %}
+                        <li><a href="../index.php?logout=true">Log out</a></li>
                     </ul>
                 </li>
 
             <!-- Pokud neni prihlasen uzivatel -->
             {% else %}
                 <li class="nav-item" {% if index == 0 %} class="active" {% endif %}>
-                    <a class="nav-link" href="index.php?page=login">
+                    <a class="nav-link" href="../index.php?page=login">
                         <span class="glyphicon glyphicon-log-in"></span> Log in</a>
                 </li>
             {% endif %}

@@ -12,19 +12,21 @@
                 <form action="../src/form-processing/change-user.php" method="post">
                     <input type="hidden" name="user_id" value={{ user.id_user }}>
 
-                    <select class="my-select" name="rights-select">
-                        <option value="1"
-                            {% if user.rights_id_rights == 1 %} selected="selected" {% endif %}
-                        >Author</option>
+                    <label>
+                        <select class="my-select" name="rights-select">
+                            <option value="1"
+                                    {% if user.rights_id_rights == 1 %} selected="selected" {% endif %}
+                            >Author</option>
 
-                        <option value="2"
-                            {% if user.rights_id_rights == 2 %} selected="selected" {% endif %}
-                        >Reviewer</option>
+                            <option value="2"
+                                    {% if user.rights_id_rights == 2 %} selected="selected" {% endif %}
+                            >Reviewer</option>
 
-                        <option value="3"
-                            {% if user.rights_id_rights == 3 %} selected="selected" {% endif %}
-                        >Admin</option>
-                    </select>
+                            <option value="3"
+                                    {% if user.rights_id_rights == 3 %} selected="selected" {% endif %}
+                            >Admin</option>
+                        </select>
+                    </label>
 
                     <input type="submit" class="btn my-table-btn" value="Change">
                 </form>
@@ -46,6 +48,9 @@
             <td><button class="btn my-table-btn" data-toggle="modal" data-target="#myModal{{ user.id_user }}">Delete</button></td>
         </tr>
 
+    {% endmacro %}
+
+    {% macro printModal(user)%}
         <div id="myModal{{ user.id_user }}" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
@@ -69,7 +74,6 @@
 
             </div>
         </div>
-
     {% endmacro %}
 
     <div class="container">
@@ -98,6 +102,13 @@
                 {% endfor %}
                 </tbody>
             </table>
+
+
+            {% import _self as printer %}
+            {% for u in users %}
+                {{ printer.printModal(u) }}
+            {% endfor %}
+
 
         </div>
 

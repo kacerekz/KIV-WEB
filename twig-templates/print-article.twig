@@ -8,6 +8,13 @@
 
         <div class="well text">
             {{ post.text | raw }}
+
+            <hr>
+
+            {% if post.file is defined %}
+                <a class="btn" href="../user-files/{{ post.users_id_user }}_{{ post.id_posts }}.pdf" target="_blank">View .pdf</a>
+            {% endif %}
+
         </div>
 
     </div>

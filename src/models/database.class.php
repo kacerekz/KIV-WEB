@@ -39,6 +39,8 @@ class Database
                 $column = $item["column"];
                 $symbol = $item["symbol"];
 
+                $value_pom = "";
+
                 if (key_exists("value", $item))
                     $value_pom = "?"; 						// budu to navazovat
                 else if (key_exists("value_mysql", $item))
@@ -130,6 +132,8 @@ class Database
 
                 $column = $item["column"];					// pozor na column, mohlo by projit SQL injection
                 $symbol = $item["symbol"];
+
+                $value_pom = "";
 
                 if (key_exists("value", $item))
                     $value_pom = "?"; 						// budu to navazovat
@@ -302,6 +306,8 @@ class Database
 
                 $column = $row["column"];
 
+                $value_pom = "";
+
                 if (key_exists("value", $row))
                     $value_pom = "?"; 						// budu to navazovat
                 else if (key_exists("value_mysql", $row))
@@ -390,6 +396,8 @@ class Database
                 if ($where_pom != "") $where_pom .= "AND ";
                 $column = $item["column"];
                 $symbol = $item["symbol"];
+                $value_pom = "";
+
                 if (key_exists("value", $item))
                     $value_pom = "?"; 						// budu to navazovat
                 else if (key_exists("value_mysql", $item))
@@ -533,6 +541,8 @@ class Database
 
                 $column = $item["column"];
                 $symbol = $item["symbol"];
+
+                $value_pom = "";
 
                 if (key_exists("value", $item))
                     $value_pom = "?"; 						// budu to navazovat

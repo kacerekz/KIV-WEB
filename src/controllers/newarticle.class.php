@@ -30,6 +30,9 @@ class NewArticle extends Controller
                 exit;
             }
 
+            if (file_exists("user-files/".$data['user']['id_user']."_".$_POST['post_id'].".pdf")){
+                $data['file'] = "true";
+            }
 
         };
 

@@ -18,7 +18,7 @@ class Articles extends Controller
 
         $articles = $db->DBSelectAll("posts", "*", array(
             array("column"=>"users_id_user", "symbol"=>"=", "value"=>$data['user']['id_user'])
-        ));
+        ), "ORDER BY `posts`.`status` ASC");
 
         foreach ($articles as $article){
 

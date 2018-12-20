@@ -18,7 +18,7 @@ class Home extends Controller
         $db = new Database();
         $articles = $db->DBSelectAll("posts", "*", array(
             array("column"=>"status", "symbol"=>"=", "value"=>"4")
-        ));
+        ), "ORDER BY `posts`.`id_posts` DESC");
 
         foreach ($articles as $article){
             // Zjisteni udaju o autorovi

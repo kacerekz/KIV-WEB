@@ -44,6 +44,10 @@ class ViewArticle extends Controller
                 exit;
             }
 
+            if (file_exists("user-files/".$article['users_id_user']."_".$_GET['id'].".pdf")){
+                $article['file'] = "true";
+            }
+
             $data['post'] = $article;
 
             parent::viewPage($data);

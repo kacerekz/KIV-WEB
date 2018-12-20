@@ -56,3 +56,7 @@
 .glyphicon-share:hover {
     color: gray;
 }
+
+.assign-btn {
+    float: right;
+}

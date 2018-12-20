@@ -86,24 +86,24 @@
 
     <!-- Makro na vypis nabidky recenzentu  -->
     {% macro printEmpty(post, reviewers, num)%}
-        <form action="../src/form-processing/rvwass.php" method="post">
-            <input type="hidden" name="post_id" value="{{ post.id_posts }}">
+        <td colspan="7">
+            <form action="../src/form-processing/rvwass.php" method="post">
+                <input type="hidden" name="post_id" value="{{ post.id_posts }}">
 
-            <td>
-                <select class="my-select" name="rev-select"  {% if num != (post.review_count+1) %} disabled {% endif %}>
-                    {% if num == (post.review_count+1) %}
-                        {% import _self as printer %}
-                        {% for r in reviewers %}
-                            {{ printer.printRevSel(post, r) }}
-                        {% endfor %}
-                    {% endif %}
-                </select>
-            </td>
+                <label>
+                    <select class="my-select" name="rev-select"  {% if num != (post.review_count+1) %} disabled {% endif %}>
+                        {% if num == (post.review_count+1) %}
+                            {% import _self as printer %}
+                            {% for r in reviewers %}
+                                {{ printer.printRevSel(post, r) }}
+                            {% endfor %}
+                        {% endif %}
+                    </select>
+                </label>
 
-            <td colspan="5"></td>
-
-            <td><input type="submit" class="btn my-table-btn" value="Assign" {% if num != (post.review_count+1) %} disabled {% endif %}></td>
-        </form>
+                <input type="submit" class="btn my-table-btn assign-btn" value="Assign" {% if num != (post.review_count+1) %} disabled {% endif %}>
+            </form>
+        </td>
     {% endmacro %}
 
 
@@ -137,12 +137,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    {% import _self as printer %}
-                    {% for a in articles %}
-                        {{ printer.print(a, reviewers) }}
-                    {% endfor %}
-                </tr>
+                {% import _self as printer %}
+                {% for a in articles %}
+                    {{ printer.print(a, reviewers) }}
+                {% endfor %}
                 </tbody>
             </table>
 

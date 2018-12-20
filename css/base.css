@@ -143,3 +143,16 @@ a:hover {
     margin-left: 5px;
     margin-top: 25px;
 }
+
+img {
+    max-width: 100%;
+    margin: 10px 0;
+}
+
+img:first-child {
+    margin-top: 0;
+}
+
+img:last-child{
+    margin-bottom: 0;
+}

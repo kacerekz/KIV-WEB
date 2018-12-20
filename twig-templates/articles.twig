@@ -8,7 +8,7 @@
 
             <td>
                 {% if post.review1 is defined %}
-                    <form action="index.php?page=viewreview" target="_blank" method="post">
+                    <form action="../index.php?page=viewreview" target="_blank" method="post">
                         <input type="hidden" name="user_id" value="{{ post.review1.users_id_user }}">
                         <input type="hidden" name="post_id" value="{{ post.review1.posts_id_posts }}">
                         <button type="submit" class="icon-btn"><span class="glyphicon glyphicon-share"></span></button>
@@ -18,7 +18,7 @@
 
             <td>
                 {% if post.review2 is defined %}
-                    <form action="index.php?page=viewreview" target="_blank" method="post">
+                    <form action="../index.php?page=viewreview" target="_blank" method="post">
                         <input type="hidden" name="user_id" value="{{ post.review2.users_id_user }}">
                         <input type="hidden" name="post_id" value="{{ post.review2.posts_id_posts }}">
                         <button type="submit" class="icon-btn"><span class="glyphicon glyphicon-share"></span></button>
@@ -28,7 +28,7 @@
 
             <td>
                 {% if post.review3 is defined %}
-                    <form action="index.php?page=viewreview" target="_blank" method="post">
+                    <form action="../index.php?page=viewreview" target="_blank" method="post">
                         <input type="hidden" name="user_id" value="{{ post.review3.users_id_user }}">
                         <input type="hidden" name="post_id" value="{{ post.review3.posts_id_posts }}">
                         <button type="submit" class="icon-btn"><span class="glyphicon glyphicon-share"></span></button>
@@ -37,13 +37,13 @@
             </td>
 
             {% if post.status <= 2 %}
-            <td>
-                <form action="index.php?page=newarticle" method="post">
-                    <input type="hidden" name="post_id" value={{ post.id_posts }}>
-                    <input type="hidden" name="mode" value="edit">
-                    <button type="submit" class="icon-btn"><span class="glyphicon glyphicon-edit"></span></button>
-                </form>
-            </td>
+                <td>
+                    <form action="../index.php?page=newarticle" method="post">
+                        <input type="hidden" name="post_id" value={{ post.id_posts }}>
+                        <input type="hidden" name="mode" value="edit">
+                        <button type="submit" class="icon-btn"><span class="glyphicon glyphicon-edit"></span></button>
+                    </form>
+                </td>
             {% else %}
                 <td></td>
             {% endif %}
@@ -66,7 +66,7 @@
             </td>
 
             <td>
-                <form action="src/form-processing/article.php" method="post">
+                <form action="../src/form-processing/newarticle.php" method="post">
                     <input type="hidden" name="post_id" value={{ post.id_posts }}>
                     <input type="submit" class="btn submit" name="delete" value="Delete">
                 </form>
@@ -77,7 +77,7 @@
 
     <div class="container">
         <div>
-            <a href="index.php?page=newarticle">
+            <a href="../index.php?page=newarticle">
                 <button class="btn new-article">
                     <span class="glyphicon glyphicon-pencil"></span>New article
                 </button>
@@ -97,12 +97,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    {% import _self as printer %}
-                    {% for a in articles %}
-                        {{ printer.print(a) }}
-                    {% endfor %}
-                </tr>
+
+                {% import _self as printer %}
+                {% for a in articles %}
+                    {{ printer.print(a) }}
+                {% endfor %}
+
                 </tbody>
             </table>
         </div>

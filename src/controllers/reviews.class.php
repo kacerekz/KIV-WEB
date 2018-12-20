@@ -29,23 +29,27 @@ class Reviews extends Controller
             }
         }
 
-        foreach ($articles as $article){
+        for ($i = 1; $i<=4; $i++){
+            foreach ($articles as $article){
+                if ($article['status'] != $i){
+                    continue;
+                }
+                // Zjisteni udaju o autorovi
+                $article['author'] = $db->DBSelectOne("users", "name, login", array(
+                    array("column"=>"id_user",  "symbol"=>"=",  "value"=>$article['users_id_user'] )
+                ));
 
-            // Zjisteni udaju o autorovi
-            $article['author'] = $db->DBSelectOne("users", "name, login", array(
-                array("column"=>"id_user",  "symbol"=>"=",  "value"=>$article['users_id_user'] )
-            ));
+                $article['review'] = $db->DBSelectOne("rating", "*", array(
+                    array("column"=>"posts_id_posts",  "symbol"=>"=",  "value"=>$article['id_posts'] ),
+                    array("column"=>"users_id_user",  "symbol"=>"=",  "value"=>$data['user']['id_user'] )
+                ));
 
-            $article['review'] = $db->DBSelectOne("rating", "*", array(
-                array("column"=>"posts_id_posts",  "symbol"=>"=",  "value"=>$article['id_posts'] ),
-                array("column"=>"users_id_user",  "symbol"=>"=",  "value"=>$data['user']['id_user'] )
-            ));
+                if (!$article['review']){
+                    unset($article['review']);
+                }
 
-            if (!$article['review']){
-                unset($article['review']);
+                $data['articles'][] = $article;
             }
-
-            $data['articles'][] = $article;
         }
 
 

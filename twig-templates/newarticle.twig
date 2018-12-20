@@ -5,7 +5,7 @@
 
         <div class="col-sm-offset-2 col-sm-7 col-md-8 col-lg-7">
             <div>
-                <a href="index.php?page=articles">
+                <a href="../index.php?page=articles">
                     <button class="btn articles-btn">
                         <span class="glyphicon glyphicon-chevron-left"></span>To articles
                     </button>
@@ -22,8 +22,7 @@
             </div>
         </div>
 
-        <form class="form-horizontal" action="../src/form-processing/newarticle.php" method="post">
-
+        <form class="form-horizontal" action="../src/form-processing/newarticle.php" method="post" enctype="multipart/form-data">
 
             <!-- Takhle to musi byt jinak se vsechno rozpadne :)) -->
             <div class="form-group">
@@ -54,17 +53,28 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="password">Enclose PDF:</label>
                 <div class="col-sm-7">
-                    <div class="upload-btn-wrapper">
-                        <button class="btn file-btn">Upload a file</button>
-                        <input type="file" name="pdf" />
-                    </div>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="upload-btn-wrapper">
+                                    <button class="btn file-btn">Upload a file</button>
+                                    <input type="file" name="file" accept=".pdf">
+                                </div>
+                            </td>
+                            <td>
+                                {% if file is defined %}
+                                    <a class="btn file-btn view-file" href="../user-files/{{ user.id_user }}_{{ post.id_posts }}.pdf" target="_blank">View .pdf</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
 
             <!-- EDITOR -->
             <div class="row">
                 <div class="col-sm-offset-2 col-sm-7 col-md-8 col-lg-7">
-                    <textarea name="content" id="editor">
+                    <label for="editor"></label><textarea name="content" id="editor">
                         {% if post is defined %}
                             {{ post.text | escape }}
                         {% endif %}
@@ -97,7 +107,7 @@
     <script>
         ClassicEditor
             .create( document.querySelector( '#editor' ), {
-                removePlugins: [ 'ImageUpload' ],
+                removePlugins: [ 'ImageUpload', 'MediaEmbed' ],
                 heading: {
                     options: [
                         { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },

@@ -5,7 +5,7 @@
 
         <div class="col-sm-offset-2 col-sm-7 col-md-8 col-lg-7">
             <div>
-                <a href="index.php?page=reviews">
+                <a href="../index.php?page=reviews">
                     <button class="btn reviews-btn">
                         <span class="glyphicon glyphicon-chevron-left"></span>To reviews
                     </button>
@@ -17,7 +17,8 @@
                     <h3>New review</h3>
                 {% endif %}
 
-                <p>For: <b>{{ post.title }}</b></p>  <!-- MAKE IT A LINK to _BLANK -->
+                <p>For: <b><a href="../index.php?page=viewarticle&id={{ post.id_posts }}" target="_blank">
+                            {{ post.title }}</a></b></p>  <!-- MAKE IT A LINK to _BLANK -->
                 <hr>
 
             </div>
@@ -90,9 +91,10 @@
             <!-- EDITOR -->
             <div class="row">
                 <div class="col-sm-offset-2 col-sm-7 col-md-8 col-lg-7">
+                    <label for="editor"></label>
                     <textarea name="content" id="editor">
                         {% if review is defined %}
-                            {{ review.text | escape }} <!-- | escape WHY IS THIS HERE AND WHY IS IT IN ARTICLES -->
+                            {{ review.text | escape }}
                         {% endif %}
                     </textarea>
 

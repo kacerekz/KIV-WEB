@@ -8,12 +8,14 @@
             <td>{{ post.author.login | raw }}</td>
 
             <td>
-                <form action="index.php?page=newreview" method="post">
+                <form action="../index.php?page=newreview" method="post">
                     <input type="hidden" name="post_id" value={{ post.id_posts }}>
                     <input type="hidden" name="user_id" value={{ user.id_user }}>
                     {% if post.review is not defined %}
-                        <button type="submit" class="icon-btn"><span class="glyphicon glyphicon-pencil"></span></button>
-                    {% elseif post.review.status > 2 %}
+                        {% if post.status != 3 %}
+                            <button type="submit" class="icon-btn"><span class="glyphicon glyphicon-pencil"></span></button>
+                        {% endif %}
+                    {% elseif post.review.status > 2 or post.status >= 3 %}
                         <button formaction="index.php?page=viewreview" formtarget="_blank"
                                 type="submit" class="icon-btn"><span class="glyphicon glyphicon-share"></span></button>
                     {% elseif post.status == 2 %}
@@ -23,7 +25,7 @@
             </td>
 
             <td>
-                {% if post.review is defined and post.review.status == 2 %}
+                {% if post.review is defined and post.review.status == 2 and post.status < 3 %}
                     {% if date(post.review.datetime) < date(post.datetime) %}
                         Article changed.
                     {% else %}
@@ -44,9 +46,9 @@
 
                 {% elseif post.review.status == 3 %}
                     Declined.
-                {% elseif post.review.status == 4 %}
+                {% elseif post.review.status == 4 or post.status == 3 %}
                     Article declined.
-                {% elseif post.review.status == 5 %}
+                {% elseif post.review.status == 5 or post.status == 4 %}
                     Article accepted.
                 {% endif %}
 

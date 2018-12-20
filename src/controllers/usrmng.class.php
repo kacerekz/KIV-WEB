@@ -15,7 +15,11 @@ class UsrMng extends Controller
     public function viewPage($data){
         include_once ("src/models/database.class.php");
         $db = new Database();
-        $users = $db->DBSelectAll("users", "id_user, name, login, email, rights_id_rights, blocked", array());
+        $users = $db->DBSelectAll(
+            "users",
+            "id_user, name, login, email, rights_id_rights, blocked",
+            array(),
+            "ORDER BY `users`.`id_user` DESC");
         $data['users'] = $users;
 
         parent::viewPage($data);
